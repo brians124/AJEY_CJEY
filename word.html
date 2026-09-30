@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Word, Prayer and Community — AJEY CJEY</title>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --night:#0d1033; --night-2:#171b57; --dawn:#f2a33a; --dawn-2:#ffd58a; --ember:#e8683a;
+  --bg:#f5f6fb; --surface:#ffffff; --surface-2:#eceef8; --ink:#0f1233; --ink-2:#4a4f78;
+  --line:#dcdff0; --accent:#a35d0b; --link:#2a30a3; --err:#b3261e; --err-bg:#fdecea; --ok:#1b7a46; --ok-bg:#e6f5ec;
+  --shadow:0 1px 2px rgba(15,18,51,.06),0 10px 30px -12px rgba(15,18,51,.25);
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --body:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --nav-h:60px; --wrap:1160px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a0c26; --surface:#12153f; --surface-2:#1a1e52; --ink:#eef0ff; --ink-2:#a9aed6;
+    --line:#262b66; --accent:#f2a33a; --link:#ffd58a; --err:#ff9c94; --err-bg:#3a1520; --ok:#7be3a6; --ok-bg:#12352a;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a0c26; --surface:#12153f; --surface-2:#1a1e52; --ink:#eef0ff; --ink-2:#a9aed6;
+  --line:#262b66; --accent:#f2a33a; --link:#ffd58a; --err:#ff9c94; --err-bg:#3a1520; --ok:#7be3a6; --ok-bg:#12352a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -14px rgba(0,0,0,.7);
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--night);scroll-padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 70px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--dawn);outline-offset:2px;border-radius:8px}
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
+.narrow{max-width:760px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg{width:1em;height:1em;flex:none}
+.meta{color:var(--ink-2);font-size:.88rem}
+.hidden,[hidden]{display:none!important}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;border-radius:999px;font-weight:800;letter-spacing:.05em;font-size:.9rem;white-space:nowrap;transition:transform .15s,background .15s,opacity .15s;border:2px solid transparent}
+.btn:active{transform:scale(.97)}
+.btn svg{font-size:1.15rem}
+.btn-primary{background:linear-gradient(180deg,var(--dawn-2),var(--dawn));color:#1a1030;box-shadow:0 10px 26px -10px rgba(242,163,58,.8)}
+.btn-solid{background:var(--night-2);color:#fff}
+.btn-ghost{border-color:rgba(255,255,255,.55);color:#fff;background:rgba(255,255,255,.07)}
+.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.btn-outline{border-color:var(--line);color:var(--ink);letter-spacing:.02em;font-weight:600}
+.btn-outline:hover{background:var(--surface-2)}
+.btn-wa{background:#25d366;color:#052e16;box-shadow:0 10px 26px -10px rgba(37,211,102,.7)}
+.btn.block{width:100%}
+.btn[disabled],.btn[aria-busy="true"]{opacity:.75;cursor:progress}
+.linkbtn{color:var(--link);font-weight:600;font-size:.92rem;padding:8px 0}
+.linkbtn:hover{text-decoration:underline}
+
+.act{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;font-size:.92rem;transition:background .15s,color .15s,border-color .15s}
+.act svg{font-size:1.2rem}
+.act:hover{background:var(--surface-2)}
+.act[aria-pressed="true"] svg{fill:currentColor}
+.act[data-action="save"][aria-pressed="true"],.act[data-action="prayed"][aria-pressed="true"]{color:var(--accent);border-color:currentColor}
+.act.sm{min-height:40px;padding:0 14px}
+
+/* ============ NAV ============ */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;height:var(--nav-h);background:rgba(13,16,51,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);color:#fff}
+.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:800;letter-spacing:.04em;font-size:1.05rem}
+.brand svg{width:28px;height:28px}
+
+/* ============ SHELL + HEROES ============ */
+#app{min-height:70vh;padding-bottom:56px}
+.phero{position:relative;overflow:hidden;color:#fff;padding:44px 0 72px;isolation:isolate}
+.phero::before{content:"";position:absolute;right:-25%;top:-55%;width:90%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,213,138,.5),transparent 65%);z-index:-1}
+.phero.word{background:linear-gradient(165deg,#171b57 0%,#3b2470 58%,#b8523f 135%)}
+.phero.prayer{background:linear-gradient(165deg,#0d1033 0%,#1f2a6b 62%,#3b2470)}
+.phero.community{background:linear-gradient(165deg,#171b57 0%,#2a1d68 55%,#e8683a 155%)}
+.phero.sub{padding-bottom:44px}
+.phero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,8.5vw,3.8rem);line-height:1.02;letter-spacing:-.02em;max-width:16ch}
+.phero p.lead{font-family:var(--serif);font-size:clamp(1.1rem,4.2vw,1.35rem);line-height:1.45;color:rgba(255,255,255,.88);margin-top:14px;max-width:46ch}
+.phero .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:520px){.phero .btns .btn{width:100%}}
+.overlap{margin-top:-46px;position:relative;z-index:2}
+
+.search{position:relative;margin-top:22px;max-width:560px}
+.search input{width:100%;min-height:54px;border-radius:999px;border:2px solid transparent;background:#fff;color:#0f1233;padding:0 48px;font-size:1rem}
+.search input:focus{border-color:var(--dawn);outline:none}
+.search>svg{position:absolute;left:18px;top:50%;translate:0 -50%;font-size:1.2rem;color:#4a4f78;pointer-events:none}
+.search .clear{position:absolute;right:6px;top:50%;translate:0 -50%;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#4a4f78}
+.search .clear:hover{background:#eceef8}
+
+.bar{position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));z-index:40;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin-top:26px;border-bottom:1px solid var(--line)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 20px;scrollbar-width:none;max-width:var(--wrap);margin-inline:auto}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;font-size:.92rem;white-space:nowrap}
+.chip:hover{background:var(--surface-2)}
+.chip[aria-pressed="true"]{background:var(--night-2);border-color:var(--night-2);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{background:var(--dawn);border-color:var(--dawn);color:#1a1030}}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{background:var(--dawn);border-color:var(--dawn);color:#1a1030}
+.resultbar{margin:24px 0 16px}
+.resultbar h2,.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,5vw,1.9rem);line-height:1.1;letter-spacing:-.01em}
+.sec{margin-top:52px}
+.sec-head{margin-bottom:18px}
+.sec-head p{color:var(--ink-2);margin-top:6px;max-width:56ch}
+.pill{display:inline-block;background:var(--surface-2);color:var(--ink);font-size:.78rem;font-weight:600;padding:3px 11px;border-radius:999px}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+
+/* ============ WORD ============ */
+.today{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:26px 22px 26px;display:grid;gap:18px}
+.today .date{font-weight:600;color:var(--accent)}
+.today h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,6vw,2.4rem);line-height:1.08;letter-spacing:-.01em;margin-top:4px}
+.verse{font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,4.6vw,1.7rem);line-height:1.4;border-left:4px solid var(--dawn);padding-left:18px}
+.verse cite{display:block;margin-top:10px;font-family:var(--body);font-style:normal;font-weight:600;font-size:.92rem;color:var(--ink-2)}
+.today .ex{font-family:var(--serif);font-size:1.12rem;color:var(--ink-2)}
+.today .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+@media (min-width:860px){.today{grid-template-columns:1.05fr 1fr;gap:40px;padding:38px;align-items:center}}
+.dgrid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.dcard{background:var(--surface);border-radius:16px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+
+.dcard h3{font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.25}
+.dcard .vref{color:var(--accent);font-weight:600;font-size:.92rem}
+.dcard .ex{font-family:var(--serif);color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.dcard .top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.dcard .meta{margin-top:auto;padding-top:4px}
+
+.back{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--link);min-height:44px}
+.back svg{font-size:1.2rem}
+.article{padding-top:8px}
+.article h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,7vw,2.9rem);line-height:1.06;letter-spacing:-.02em;margin:10px 0 8px}
+.article .byline{display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--ink-2);font-size:.92rem;margin-bottom:26px}
+.article .verse{background:var(--surface);border-radius:0 22px 22px 0;padding:22px 22px 22px 22px;box-shadow:var(--shadow)}
+.prose{font-family:var(--serif);font-size:1.2rem;line-height:1.75;margin-top:28px;display:grid;gap:1.1em}
+.box{background:var(--surface-2);border-radius:16px;padding:22px;margin-top:28px}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.15rem;margin-bottom:10px}
+.box p{font-family:var(--serif);font-size:1.15rem;line-height:1.65}
+.box ul{display:grid;gap:10px}
+.box li{position:relative;padding-left:22px;font-family:var(--serif);font-size:1.12rem;line-height:1.5}
+.box li::before{content:"";position:absolute;left:2px;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--dawn)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pager{display:grid;gap:12px;margin-top:34px}
+.pager a{background:var(--surface);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);display:block}
+.pager small{display:block;color:var(--ink-2);font-size:.82rem}
+.pager b{font-family:var(--display);font-weight:600;line-height:1.25}
+.pager .newer{text-align:right}
+@media (min-width:640px){.pager{grid-template-columns:1fr 1fr}}
+
+/* ============ PRAYER ============ */
+.hub{display:grid;gap:16px}
+@media (min-width:800px){.hub{grid-template-columns:1fr 1fr}}
+.hubcard{background:var(--surface);border-radius:16px;padding:28px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hubcard .ic{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--dawn-2),var(--dawn));color:#1a1030;font-size:1.6rem}
+.hubcard h2{font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1.1}
+.hubcard p{color:var(--ink-2);flex:1}
+.steps{display:grid;gap:14px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;background:var(--surface);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.steps li::before{counter-increment:s;content:counter(s);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--night-2);color:#fff;font-weight:800;font-family:var(--display)}
+.steps b{display:block;font-family:var(--display);font-weight:600}
+.steps span{color:var(--ink-2)}
+@media (min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}.steps li{grid-template-columns:1fr;gap:10px}}
+.notice{display:flex;gap:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 18px}
+.notice>svg{font-size:1.6rem;color:var(--accent);margin-top:2px}
+.notice b{display:block;font-family:var(--display);font-weight:600;margin-bottom:4px}
+.notice ul{display:grid;gap:6px;margin-top:8px}
+.notice li{position:relative;padding-left:18px;color:var(--ink-2);font-size:.94rem}
+.notice li::before{content:"";position:absolute;left:2px;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.notice p{color:var(--ink-2);font-size:.94rem}
+.notice.alert{border-color:transparent;background:var(--surface-2)}
+.wall{display:grid;gap:16px}
+@media (min-width:860px){.wall{grid-template-columns:1fr 1fr}}
+.pc{background:var(--surface);border-radius:16px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.pc .ph{display:flex;gap:8px;flex-wrap:wrap}
+.pc .ptext{font-family:var(--serif);font-size:1.15rem;line-height:1.6;overflow-wrap:anywhere}
+.pc .answer{background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:10px 14px;font-size:.94rem}
+.pc .pf{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:auto}
+.pc .who{display:flex;flex-direction:column;flex:1;min-width:120px}
+.pc .who b{font-family:var(--display);font-weight:600;line-height:1.2}
+.pc .rep{color:var(--ink-2);font-size:.85rem;padding:8px 6px;min-height:44px}
+.pc .rep:hover{text-decoration:underline}
+
+/* ============ COMMUNITY ============ */
+.cta-card{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:28px 22px;display:grid;gap:22px}
+.cta-card h2{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,5.5vw,2.1rem);line-height:1.1}
+.cta-card p{color:var(--ink-2);margin-top:8px}
+.cta-card details{border-top:1px solid var(--line);padding-top:14px}
+.cta-card summary{font-weight:600;cursor:pointer;min-height:36px;display:flex;align-items:center}
+.cta-card details ul{display:grid;gap:8px;margin-top:10px}
+.cta-card details li{position:relative;padding-left:18px;color:var(--ink-2)}
+.cta-card details li::before{content:"";position:absolute;left:2px;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@media (min-width:860px){.cta-card{grid-template-columns:1.3fr 1fr;align-items:center;padding:38px;gap:40px}}
+.alist{display:grid;gap:12px}
+.ann{background:var(--surface);border-radius:16px;padding:20px;box-shadow:var(--shadow);display:grid;gap:6px}
+.ann.pin{border:2px solid var(--dawn)}
+.ann h3{font-family:var(--display);font-weight:600;font-size:1.1rem;line-height:1.25}
+.ann p{color:var(--ink-2)}
+.ann .head{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tgrid{display:grid;gap:16px}
+@media (min-width:860px){.tgrid{grid-template-columns:repeat(3,1fr)}}
+.tm{background:var(--surface);border-radius:16px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.tm blockquote{margin:0;font-family:var(--serif);font-size:1.15rem;line-height:1.55}
+.tm.clamp blockquote{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.tm .who{display:flex;align-items:center;gap:12px;margin-top:auto}
+.avatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,hsl(var(--h,240) 60% 32%),hsl(calc(var(--h,240) + 40) 70% 52%))}
+.tm .who b{display:block;line-height:1.2}
+.youth{background:linear-gradient(140deg,var(--night),var(--night-2) 55%,#3b2470);color:#fff;border-radius:16px;padding:30px 22px;display:grid;gap:22px;box-shadow:var(--shadow)}
+.youth h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,6vw,2.3rem);line-height:1.05}
+.youth p{color:rgba(255,255,255,.85);margin-top:10px}
+.youth ul{display:grid;gap:10px}
+.youth li{background:rgba(255,255,255,.08);border-radius:12px;padding:14px 16px}
+.youth li b{display:block;font-family:var(--display);font-weight:600}
+.youth li span{color:rgba(255,255,255,.75);font-size:.94rem}
+.youth .safe{font-size:.88rem;color:rgba(255,255,255,.7);margin-top:14px}
+@media (min-width:860px){.youth{grid-template-columns:1.1fr 1fr;padding:42px;gap:40px;align-items:center}}
+.elist{display:grid;gap:14px}
+.ev{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:86px 1fr;overflow:hidden}
+.ev .dt{background:linear-gradient(170deg,var(--night-2),#3b2470);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;text-align:center}
+.ev .dt b{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1}
+.ev .dt span{font-size:.85rem;color:rgba(255,255,255,.8)}
+.ev .bd{padding:16px 18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.ev h3{font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.25}
+.ev p{color:var(--ink-2);font-size:.95rem}
+.ev .btn{min-height:44px;padding:0 20px;margin-top:6px}
+@media (min-width:860px){.elist{grid-template-columns:1fr 1fr}}
+
+/* ============ FORMS ============ */
+.formcard{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:26px 20px}
+@media (min-width:640px){.formcard{padding:34px}}
+.form{display:grid;gap:20px}
+.field{display:grid;gap:7px}
+.field>label,.field legend{font-weight:600;line-height:1.3}
+.field legend{padding:0;margin-bottom:8px}
+.field fieldset{border:0;margin:0;padding:0;min-width:0}
+.opt{font-weight:400;color:var(--ink-2);font-size:.85rem;margin-left:6px}
+.hint{color:var(--ink-2);font-size:.88rem;line-height:1.4}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field select,.field textarea{width:100%;min-height:52px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);padding:0 16px;font-size:1rem}
+.field textarea{padding:14px 16px;min-height:150px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--dawn);outline:none;box-shadow:0 0 0 3px rgba(242,163,58,.25)}
+.field.has-error input:not([type=checkbox]):not([type=radio]),.field.has-error select,.field.has-error textarea{border-color:var(--err)}
+.err{color:var(--err);font-size:.9rem;font-weight:600;display:flex;gap:6px;align-items:flex-start}
+.err:empty{display:none}
+.count{justify-self:end;font-size:.82rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.count.over{color:var(--err);font-weight:600}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;line-height:1.45}
+.check input,.radio input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--night-2);flex:none}
+.check b{font-weight:600}
+.radios{display:grid;gap:10px}
+.radio{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;background:var(--bg)}
+.radio:has(input:checked){border-color:var(--dawn);background:color-mix(in srgb,var(--dawn) 12%,var(--bg))}
+.radio span b{display:block;font-weight:600}
+.radio span small{color:var(--ink-2);font-size:.88rem;line-height:1.4;display:block;margin-top:2px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.banner{border-radius:12px;padding:14px 16px;font-weight:600;display:flex;gap:10px;align-items:flex-start}
+.banner.error{background:var(--err-bg);color:var(--err)}
+.banner svg{font-size:1.25rem;margin-top:1px}
+.banner small{display:block;font-weight:400;margin-top:2px}
+.spin{display:none;width:18px;height:18px;border-radius:50%;border:3px solid currentColor;border-right-color:transparent;animation:rot .8s linear infinite}
+[aria-busy="true"] .spin{display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.success{display:grid;gap:14px;justify-items:start;padding:6px 0;outline:none}
+.success .tick{width:58px;height:58px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;font-size:1.8rem}
+.success h2{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1.1}
+.success p{color:var(--ink-2)}
+.success .ref{background:var(--surface-2);border-radius:12px;padding:12px 16px;font-size:.92rem}
+.success .ref b{font-family:var(--display);font-size:1.15rem;letter-spacing:.06em;color:var(--ink)}
+.success .verse{font-size:1.1rem;margin:4px 0}
+.success .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(8,10,35,.62);display:flex;align-items:flex-end;justify-content:center;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.sheet{background:var(--bg);width:100%;max-width:560px;max-height:92svh;overflow-y:auto;border-radius:16px 16px 0 0;padding:6px 20px calc(24px + env(safe-area-inset-bottom,0px))}
+@media (min-width:640px){.modal{align-items:center;padding:20px}.sheet{border-radius:16px;padding:10px 28px 28px}}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0 12px;position:sticky;top:0;background:var(--bg);z-index:2}
+.sheet-head h2{font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1.15}
+.xbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;flex:none}
+.xbtn:hover{background:var(--surface-2)}
+
+/* toast, skeleton, empty, footer */
+.toast{position:fixed;z-index:120;left:50%;translate:-50% 0;bottom:calc(28px + env(safe-area-inset-bottom,0px));background:var(--night);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.92rem;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);max-width:90vw;opacity:0;pointer-events:none;transition:opacity .2s;text-align:center}
+.toast.show{opacity:1}
+.skel{background:linear-gradient(90deg,var(--surface-2),var(--surface),var(--surface-2));background-size:200% 100%;animation:sk 1.4s linear infinite;border-radius:16px;min-height:150px}
+@keyframes sk{to{background-position:-200% 0}}
+.empty{padding:40px 24px;border:1.5px dashed var(--line);border-radius:16px;text-align:center;color:var(--ink-2);display:flex;flex-direction:column;gap:14px;align-items:center}
+.empty b{font-family:var(--display);color:var(--ink);font-size:1.15rem}
+.more-wrap{display:flex;justify-content:center;margin-top:28px}
+.foot{background:var(--night);color:rgba(255,255,255,.75);padding:34px 0 calc(30px + env(safe-area-inset-bottom,0px))}
+.foot .wrap{display:flex;flex-direction:column;gap:14px}
+.foot nav{display:flex;flex-wrap:wrap;gap:4px 18px}
+.foot a{padding:8px 0;font-weight:600}
+.foot a:hover{color:var(--dawn-2)}
+.foot small{color:rgba(255,255,255,.55)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============ SHARED PRIMARY NAV (same on every public page) ============ */
+.nav-links{display:none;gap:2px;list-style:none;margin:0 0 0 auto;padding:0}
+.nav-links a{display:block;padding:10px 14px;border-radius:999px;font-weight:600;font-size:.95rem;color:rgba(255,255,255,.78)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a[aria-current="page"]{background:var(--dawn);color:#1a1030}
+.nav-cta{display:none}
+.burger{margin-left:auto;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.burger span{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .2s}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.drawer{position:fixed;left:0;right:0;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));bottom:0;z-index:70;background:#0d1033;padding:16px 20px calc(28px + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;overflow-y:auto;color:#fff}
+.drawer.open{display:flex}
+.drawer a.dl{font-family:var(--display);font-size:1.5rem;font-weight:600;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.1)}
+.drawer a.dl[aria-current="page"]{color:var(--dawn-2)}
+.drawer .btn{margin-top:18px;width:100%}
+#navRight{margin-left:auto}#navRight ~ .burger{margin-left:0}
+@media (min-width:1000px){.nav-links{display:flex}.nav-cta{display:inline-flex}.burger{display:none}.drawer{display:none!important}#navRight{margin-left:0}}
+@media (max-width:420px){.brand span{display:none}}
+
+/* ===== DEVICE FIT: phones, tablets, landscape, notches, large screens ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{overflow-x:clip}
+img,video,iframe,canvas,svg{max-width:100%}
+a,button,summary,label,input,select,textarea{touch-action:manipulation}
+input,select,textarea{font-size:max(16px,1rem)}
+h1,h2,h3,h4,p,li,blockquote,figcaption,td,th{overflow-wrap:break-word}
+.wrap{padding-inline:max(20px,env(safe-area-inset-left),env(safe-area-inset-right))}
+.chip,button.chip,.rail a,.back,.act.sm,.select,.cm-head-row .select,.composer .btn,.sm,.cta-card summary{min-height:44px}
+@media (max-width:480px){
+  .wrap{padding-inline:max(16px,env(safe-area-inset-left),env(safe-area-inset-right))}
+  .btn{white-space:normal;text-align:center;line-height:1.2;padding-block:10px}
+  .toast{max-width:calc(100vw - 32px);text-align:center;white-space:normal}
+}
+@media (max-height:480px) and (orientation:landscape){
+  .hero{min-height:0}.hero-inner{padding:32px 0 48px}
+  .drawer a.dl{font-size:1.15rem;padding:10px 4px}
+}
+@media (min-width:1600px){:root{--wrap:1280px}}
+</style>
+</head>
+<body>
+
+<div id="shell">
+  <header class="nav"><div class="wrap"><a class="brand" id="brand" href="index.html" aria-label="AJEY CJEY home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="bm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd58a"/><stop offset="1" stop-color="#e8683a"/></linearGradient></defs><circle cx="16" cy="16" r="15" fill="none" stroke="url(#bm)" stroke-width="2"/><path d="M16 6v20M9 12h14" stroke="url(#bm)" stroke-width="3.2" stroke-linecap="round"/></svg><span>AJEY CJEY</span></a><nav aria-label="Primary"><ul class="nav-links"><li><a data-nav="watch" href="watch.html#/watch">Watch</a></li><li><a data-nav="listen" href="watch.html#/listen">Listen</a></li><li><a data-nav="word" href="word.html#/word">Word</a></li><li><a data-nav="prayer" href="word.html#/prayer">Prayer</a></li><li><a data-nav="community" href="word.html#/community">Community</a></li></ul></nav><a class="btn btn-primary btn-sm nav-cta" data-nav="me" href="account.html">MY AJEY</a><button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button></div></header><div class="drawer" id="drawer" aria-hidden="true"><a class="dl" data-nav="watch" href="watch.html#/watch">Watch</a><a class="dl" data-nav="listen" href="watch.html#/listen">Listen</a><a class="dl" data-nav="word" href="word.html#/word">Word</a><a class="dl" data-nav="prayer" href="word.html#/prayer">Prayer</a><a class="dl" data-nav="community" href="word.html#/community">Community</a><a class="btn btn-primary" data-nav="me" href="account.html">MY AJEY</a></div>
+  <main id="app" tabindex="-1"></main>
+  <footer class="foot"><div class="wrap">
+    <nav aria-label="Site"><a href="index.html">Home</a><a href="watch.html#/watch">Watch</a><a href="watch.html#/listen">Listen</a><a href="word.html#/word">Word</a><a href="word.html#/prayer">Prayer</a><a href="word.html#/community">Community</a><a href="account.html">My AJEY</a></nav>
+    <small>AJEY CJEY. Amazing Jesus Encounters You. Faith • Creativity • Purpose.</small>
+  </div></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   CONFIG
+   ===================================================================== */
+const CONFIG = {
+  apiBase: "",                 // e.g. "https://api.ajeycjey.org/v1". "" = sample data
+  fallbackToSample: true,      // set false in production so API errors surface
+  pageSize: 9,
+  wallPageSize: 6,
+  submitTimeoutMs: 15000,
+  cooldownMs: 20000,           // minimum gap between two sends of the same form
+  whatsappCommunityUrl: "https://chat.whatsapp.com/REPLACE_WITH_YOUR_INVITE",
+  whatsappYouthUrl: "https://chat.whatsapp.com/REPLACE_WITH_YOUR_YOUTH_INVITE"
+};
+
+/* =====================================================================
+   DATA SHAPES
+   Devotional : { id, title, category(slug), verse, reference, translation, body:[p...], prayer, questions:[...],
+                  author, publishedAt(ISO), readMins }
+   PrayerWallItem (PUBLIC, already moderated) : { id, category, text, displayName|null, createdAt, prayedCount,
+                  status:'active'|'answered', answerNote? }
+        SERVER RULE: this endpoint must never return email, IP, private requests, or unapproved posts.
+   Announcement: { id, title, text, date, pinned?, link?, linkLabel? }
+   Testimony   : { id, name, place?, text, date, hue? }
+   Event       : { id, title, startsAt(ISO), location, description, rsvpOpen }
+   Lists       : { items:[...], total }
+   ===================================================================== */
+const ago = d => new Date(Date.now() - d * 864e5).toISOString();
+const SAMPLE = { devoCats:[], devos:[], wall:[], prayerCats:[], announcements:[], testimonies:[], events:[], youth:{}, community:{} };
+SAMPLE.devoCats = [["faith","Faith"],["hope","Hope"],["prayer","Prayer"],["purpose","Purpose"],["healing","Healing"],["family","Family"],["gratitude","Gratitude"],["youth","Youth"]].map(([slug,name]) => ({slug,name}));
+SAMPLE.prayerCats = [["healing","Healing"],["family","Family"],["guidance","Guidance"],["provision","Provision"],["salvation","Salvation"],["thanksgiving","Thanksgiving"],["other","Other"]].map(([slug,name]) => ({slug,name}));
+// id, daysAgo, category, title, reference, verse, p1, p2, prayer, q1, q2
+[
+ ["d1",0,"faith","He meets you where you are","James 4:8","Draw nigh to God, and he will draw nigh to you.",
+  "You do not have to arrive polished. God is not waiting for the version of you that has it all together. He is inviting the real one: the tired one, the distracted one, the one with unanswered questions.",
+  "Today, take one honest minute. Tell Jesus how the day really feels, and ask him to be near. Scripture promises that when we move toward God, he moves toward us. Nearness is his idea.",
+  "Jesus, here I am, just as I am. Meet me in this day. Quiet my mind, steady my heart, and help me notice you. Amen.",
+  "What am I carrying today that I have not yet handed to Jesus?","Where can I make five quiet minutes for him?"],
+ ["d2",1,"prayer","Peace that makes no sense","Philippians 4:6-7","Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+  "Anxiety tells us to hold every problem tightly and think harder. Paul offers another way: bring it to God, with thanks, in plain words. Prayer does not always change the situation first. It often changes us first.",
+  "Notice the promise. It is not that we will understand everything, but that God's peace will stand guard over our hearts and minds. Peace becomes a guard at the door of your thoughts.",
+  "Father, I bring you what worries me. I say thank you for what you have already done. Guard my heart and mind with your peace. Amen.",
+  "What is one worry I can turn into a prayer today?","What can I thank God for right now?"],
+ ["d3",3,"hope","Do not be afraid","Isaiah 41:10","Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.",
+  "Fear is loud, especially at night. God does not answer it with a lecture. He answers with his presence: I am with you. Before he tells you what to do, he tells you who is beside you.",
+  "Strength, help and support are all promised here, and none of them depend on how brave you feel. Courage is not the absence of fear. It is taking the next step because God is near.",
+  "Lord, you know what I am afraid of. Remind me that you are with me. Give me strength for today's next step. Amen.",
+  "What fear needs to hear that God is with me?","What is the next small step I can take?"],
+ ["d4",5,"purpose","A hope and a future","Jeremiah 29:11","For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.",
+  "These words were written to people living far from home, in a season they did not choose. God did not promise a quick escape. He promised that his plans for them were good and that their story was not over.",
+  "If you feel in-between today, waiting or unsure, this verse is for you. Purpose is not only found at the finish line. It is being formed in the waiting, one faithful day at a time.",
+  "God, I trust that you are writing a good story, even here. Help me be faithful today, and give me hope for what is ahead. Amen.",
+  "Where do I feel in-between right now?","How can I be faithful in this season?"],
+ ["d5",7,"healing","Close to the brokenhearted","Psalm 34:18","The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+  "Grief and disappointment can make God feel far away. This verse says the opposite: he draws nearest when hearts are breaking. You do not need to hide your pain to be close to him.",
+  "Healing is often slow, and it often begins with being honest. Tell God exactly where it hurts. Then let a trusted friend, pastor or counsellor walk with you as well. You were not made to heal alone.",
+  "Jesus, my heart is heavy. Come close. Hold what is broken, and lead me toward healing, one step at a time. Amen.",
+  "What pain have I been hiding from God?","Who could I let walk with me this week?"],
+ ["d6",9,"faith","Trusting when you cannot see","Proverbs 3:5-6","Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+  "Trust is easy when the path is clear. It is a different thing when the way is hidden. Proverbs invites us to trust with all the heart, not only the parts that feel certain.",
+  "Leaning on our own understanding is tempting because it feels safe. But God sees the whole road. Acknowledge him in the small decisions today, and he will direct the path.",
+  "Lord, I do not see the whole way, but I trust you. Guide my decisions today and straighten my path. Amen.",
+  "Where am I leaning only on my own understanding?","What decision can I bring to God today?"],
+ ["d7",12,"gratitude","A grateful gate","Psalm 100:4","Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name.",
+  "Thanksgiving is a doorway. Before we ask for anything, the psalmist says we can walk in through gratitude. It turns our attention from what is missing to who is present.",
+  "Try naming three gifts from today. Small ones count: a meal, a message, a moment of calm. Gratitude does not deny hard things. It simply refuses to let them have the last word.",
+  "Thank you, Father, for your goodness. Open my eyes to your gifts today, and let my heart come home to praise. Amen.",
+  "What three things can I thank God for today?","Who can I thank out loud this week?"],
+ ["d8",14,"healing","Rest for the weary","Matthew 11:28","Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+  "Jesus does not say, come when you have improved. He says, come when you are tired. His invitation is for the weary and the overloaded, which is most of us at some point.",
+  "Rest is not laziness. It is trust. Today, put something down on purpose: a task, a worry, a need to prove yourself. Sit with Jesus and let him carry what you cannot.",
+  "Jesus, I am tired. I come to you. Give me rest for my body, my mind and my soul. Amen.",
+  "What am I carrying that I was never meant to carry?","What would real rest look like this week?"],
+ ["d9",17,"youth","An example in a small place","1 Timothy 4:12","Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity.",
+  "Timothy was young, and some people looked down on him. Paul's advice was not to argue or to wait until he was older. It was to live a life worth following, right where he was.",
+  "You do not need a platform to be an example. Your words, your kindness and your integrity at school, at home and online are already telling a story. Let it be a story that points to Jesus.",
+  "Lord, help me live as an example in what I say, how I love, and what I believe. Give me courage to stay true. Amen.",
+  "Where can my life point to Jesus this week?","What would it look like to be an example online?"],
+ ["d10",20,"family","Our house, our altar","Joshua 24:15","…but as for me and my house, we will serve the LORD.",
+  "Joshua did not wait for everyone to agree. He decided for himself and his household. A family's faith often begins with one person quietly choosing to follow Jesus.",
+  "That might look like a shared meal with a short prayer, a Bible verse on the fridge, or simply being the first to say sorry. Small, steady habits build a home where God is welcome.",
+  "Father, bless our home. Help us love one another, forgive quickly, and welcome you into our days. Amen.",
+  "What small habit could invite God into our home?","Who in my family needs a word of encouragement today?"],
+ ["d11",23,"hope","Strong and not alone","Joshua 1:9","Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
+  "God commands courage, and then gives the reason: he is with you wherever you go. Courage is not a personality type. It is a response to a promise.",
+  "Whatever is ahead today, an exam, a conversation, a new start, you are not walking into it by yourself. Take a breath, take the step, and remember who goes with you.",
+  "God, I need courage. Thank you that you go with me. Help me take the next step with confidence in you. Amen.",
+  "What am I facing that needs courage?","How does knowing God is with me change my next step?"],
+ ["d12",26,"purpose","Working together for good","Romans 8:28","And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+  "This verse does not say every event is good. It says God is at work in all things, weaving them toward good for those who love him. Even hard chapters are not wasted in his hands.",
+  "You may not see the pattern yet. Purpose often makes sense looking backward. For today, hold on to the promise and keep loving God with what you have.",
+  "Lord, I trust that you are working for good, even where I cannot see it. Help me keep loving you. Amen.",
+  "What difficult thing am I struggling to trust God with?","Looking back, where have I seen God bring good from a hard season?"],
+ ["d13",29,"prayer","Ask, and keep asking","Luke 11:9","And I say unto you, Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you.",
+  "Jesus tells us to ask, seek and knock: words that keep going. Prayer is not a single try. It is a relationship, and persistence is part of trust.",
+  "Bring your request again today, without embarrassment. God is not tired of hearing from you. He is a Father who delights when his children come.",
+  "Father, I ask again. Give me patience as I wait, and faith to keep knocking. Amen.",
+  "What have I stopped asking God for?","How can I keep praying with hope?"]
+].forEach(r => { const words = (r[6] + " " + r[7] + " " + r[8]).split(/\s+/).length;
+  SAMPLE.devos.push({id:r[0], publishedAt:ago(r[1]), category:r[2], title:r[3], reference:r[4], verse:r[5], translation:"KJV", body:[r[6], r[7]], prayer:r[8], questions:[r[9], r[10]], author:"AJEY CJEY Team", readMins:Math.max(2, Math.round(words / 180))}); });
+// approved, public-safe sample posts only (first names or anonymous, no contact details)
+[
+ ["w1","healing","Please pray for healing and strength for a loved one who has been unwell.",null,1,42,"active"],
+ ["w2","family","Pray for peace in our home and for wisdom as we make a big decision together.","Grace",2,31,"active"],
+ ["w3","guidance","I start a new job on Monday. Pray that I walk in wisdom and kindness.","Daniel",3,27,"active"],
+ ["w4","provision","Pray for provision for our family as we trust God for school fees this term.",null,4,38,"active"],
+ ["w5","salvation","Please pray for my friends who do not know Jesus yet. Pray for open hearts.","Ruth",6,19,"active"],
+ ["w6","thanksgiving","Praise God, my prayer for a job was answered this month. Thank you for praying with me.","Peter",8,54,"answered","God opened a door I could not open myself."],
+ ["w7","guidance","Pray for our youth group as we plan an outreach this weekend.","Esther",9,23,"active"],
+ ["w8","healing","Thank you for praying. My peace has returned and I am sleeping well again.",null,12,61,"answered","Peace came slowly, then all at once."]
+].forEach(r => SAMPLE.wall.push({id:r[0], category:r[1], text:r[2], displayName:r[3], createdAt:ago(r[4]), prayedCount:r[5], status:r[6], answerNote:r[7] || ""}));
+SAMPLE.announcements = [
+ {id:"a1", title:"Welcome to Gospel to the World", text:"Join our WhatsApp community to pray, share and stay in touch. Everyone is welcome.", date:ago(20), pinned:true},
+ {id:"a2", title:"Online prayer night this Friday", text:"Join us at 8:00 PM for an hour of worship and prayer. Bring a friend.", date:ago(1)},
+ {id:"a3", title:"New devotional series begins Monday", text:"Five days on trusting God in uncertain seasons. A new reading each morning.", date:ago(3)},
+ {id:"a4", title:"Volunteers wanted for our media team", text:"Video, photography, design and writing. Tell us how you would like to serve.", date:ago(6)}
+];
+SAMPLE.testimonies = [
+ {id:"m1", name:"Grace M.", place:"Kampala", text:"I came to a worship night tired and empty. I left knowing Jesus had seen me. The prayers from this community carried me through a very hard month, and I am grateful.", date:ago(4), hue:330},
+ {id:"m2", name:"Daniel K.", place:"Entebbe", text:"The daily devotionals became my morning routine. A few minutes with Scripture and a prayer changed how I start every day, and my faith finally feels alive.", date:ago(9), hue:205},
+ {id:"m3", name:"Ruth A.", place:"Jinja", text:"Watching the testimonies gave me courage to start the creative work God put in my heart. I did not think I was ready, but I took the first step.", date:ago(15), hue:30}
+];
+SAMPLE.events = [
+ {id:"e1", title:"Online prayer night", startsAt:ago(-2).slice(0,11) + "17:00:00.000Z", location:"Online, join from anywhere", description:"An hour of worship and prayer together.", rsvpOpen:true},
+ {id:"e2", title:"Encounter Night", startsAt:ago(-9).slice(0,11) + "15:00:00.000Z", location:"Venue to be announced", description:"Live worship, a short message and time for prayer. Everyone is welcome.", rsvpOpen:true},
+ {id:"e3", title:"Youth hangout", startsAt:ago(-12).slice(0,11) + "13:00:00.000Z", location:"Venue to be announced", description:"Games, music and honest conversation for young people.", rsvpOpen:true},
+ {id:"e4", title:"Gospel to the World outreach", startsAt:ago(-26).slice(0,11) + "07:00:00.000Z", location:"Community outreach, details to follow", description:"Serve together and share the good news with our neighbours.", rsvpOpen:true}
+];
+SAMPLE.youth = {title:"Youth community", text:"A safe, encouraging space for young believers to grow in faith, build friendships and discover their purpose.", meetsWhen:"Saturdays, 4:00 PM", highlights:[
+  {title:"Weekly hangout", text:"Worship, a short talk and open conversation."},
+  {title:"Mentorship", text:"Meet a trusted older believer who can walk with you."},
+  {title:"Creative nights", text:"Music, art, film and writing for the glory of God."}
+]};
+SAMPLE.community = {title:"Gospel to the World", text:"A community of believers who pray together, share stories and take the good news further. Everyone is welcome.", guidelines:[
+  "Be kind and encouraging in everything you post.","Keep other people's prayer requests and stories private.","No spam, arguments or politics.","Adults lead youth spaces, and safeguarding always comes first."
+]};
+
+/* ---------- sample "server": mirrors the real API's query params ---------- */
+const page = (a, pg, size) => { const total = a.length; size = +size || total || 1; pg = +pg || 1; return {items:a.slice((pg-1)*size, pg*size), total}; };
+const rid = n => Array.from({length:n}, () => "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random() * 32)]).join("");
+const Sample = {
+  fail(){ return location.hash.includes("fail=1"); },   // add ?fail=1 to any hash to test error states
+  devos(p){
+    let a = [...SAMPLE.devos];
+    if (p.ids != null){ const s = String(p.ids).split(",").filter(Boolean); a = a.filter(d => s.includes(d.id)); }
+    if (p.category) a = a.filter(d => d.category === p.category);
+    if (p.q){ const q = p.q.toLowerCase(); a = a.filter(d => (d.title + " " + d.reference + " " + d.verse + " " + d.body.join(" ")).toLowerCase().includes(q)); }
+    a.sort((x, y) => new Date(y.publishedAt) - new Date(x.publishedAt));
+    return page(a, p.page, p.pageSize);
+  },
+  devo(id){
+    const a = [...SAMPLE.devos].sort((x, y) => new Date(y.publishedAt) - new Date(x.publishedAt)), i = a.findIndex(d => d.id === id);
+    if (i < 0) return null; const s = d => d && {id:d.id, title:d.title};
+    return {...a[i], newer:s(a[i-1]), older:s(a[i+1])};
+  },
+  wall(p){
+    let a = [...SAMPLE.wall];
+    if (p.status) a = a.filter(x => x.status === p.status);
+    if (p.category) a = a.filter(x => x.category === p.category);
+    a.sort((x, y) => new Date(y.createdAt) - new Date(x.createdAt));
+    return page(a, p.page, p.pageSize);
+  }
+};
+
+/* =====================================================================
+   API
+   GET  /devotionals/today                     -> Devotional
+   GET  /devotionals?q&category&ids&page&pageSize -> {items,total}
+   GET  /devotionals/:id                       -> Devotional (+ newer:{id,title}, older:{id,title})
+   GET  /devotional-categories                 -> [{slug,name}]
+   GET  /prayer-wall?category&status&page&pageSize -> {items,total}  (approved + public only)
+   POST /prayer-requests {anonymous,name?,email?,category,text,visibility,consent} -> {reference,status:'received'|'pending_review'}
+   POST /prayer-wall/:id/prayed {on}           POST /prayer-wall/:id/report {reason,note?}
+   GET  /community  /announcements  /testimonies  /community/youth  /events
+   POST /testimonies {anonymous,name?,place?,text,consent} -> {reference}
+   POST /events/:id/rsvp {name,contact,guests}  -> {reference}
+   POST /reactions {kind,type,id,on}
+   ===================================================================== */
+const delay = ms => new Promise(r => setTimeout(r, ms));
+async function remote(path, {method = "GET", params, body} = {}, sample){
+  if (CONFIG.apiBase){
+    try {
+      const u = new URL(CONFIG.apiBase.replace(/\/$/, "") + path);
+      Object.entries(params || {}).forEach(([k, v]) => { if (v !== "" && v != null) u.searchParams.set(k, v); });
+      const r = await fetch(u, {method, headers:{Accept:"application/json", ...(body ? {"Content-Type":"application/json"} : {})}, body:body ? JSON.stringify(body) : undefined});
+      if (r.ok) return r.status === 204 ? {} : await r.json();
+      if (!CONFIG.fallbackToSample) throw new Error("API " + r.status);
+    } catch (e) { if (!CONFIG.fallbackToSample) throw e; }
+  }
+  await delay(method === "GET" ? 140 : 900);
+  return sample();
+}
+const failIfTesting = () => { if (Sample.fail()) throw new Error("Simulated failure"); };
+const API = {
+  devoCategories: () => remote("/devotional-categories", {}, () => SAMPLE.devoCats),
+  today: () => remote("/devotionals/today", {}, () => Sample.devos({pageSize:1}).items[0]),
+  devos: p => remote("/devotionals", {params:p}, () => Sample.devos(p)),
+  devo: id => remote(`/devotionals/${id}`, {}, () => Sample.devo(id)),
+  prayerCategories: () => remote("/prayer-categories", {}, () => SAMPLE.prayerCats),
+  wall: p => remote("/prayer-wall", {params:p}, () => Sample.wall(p)),
+  submitPrayer: b => remote("/prayer-requests", {method:"POST", body:b}, () => { failIfTesting(); return {reference:"AJ-" + rid(5), status:b.visibility === "wall" ? "pending_review" : "received"}; }),
+  prayed: (id, on) => { if (CONFIG.apiBase) remote(`/prayer-wall/${id}/prayed`, {method:"POST", body:{on}}, () => null).catch(() => {}); },
+  report: (id, b) => remote(`/prayer-wall/${id}/report`, {method:"POST", body:b}, () => { failIfTesting(); return {ok:true}; }),
+  community: () => remote("/community", {}, () => SAMPLE.community),
+  announcements: () => remote("/announcements", {}, () => ({items:SAMPLE.announcements})),
+  testimonies: () => remote("/testimonies", {}, () => ({items:SAMPLE.testimonies})),
+  submitTestimony: b => remote("/testimonies", {method:"POST", body:b}, () => { failIfTesting(); return {reference:"AJ-" + rid(5)}; }),
+  youth: () => remote("/community/youth", {}, () => SAMPLE.youth),
+  events: () => remote("/events", {}, () => ({items:SAMPLE.events})),
+  rsvp: (id, b) => remote(`/events/${id}/rsvp`, {method:"POST", body:b}, () => { failIfTesting(); return {reference:"AJ-" + rid(5)}; }),
+  react: (kind, type, id, on) => { if (CONFIG.apiBase) remote("/reactions", {method:"POST", body:{kind, type, id, on}}, () => null).catch(() => {}); }
+};
+
+/* =====================================================================
+   HELPERS + STORE
+   Saved items and "I prayed" taps are kept on this device only, as IDs.
+   Prayer request text is NEVER written to storage, URLs or logs.
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^(https?:\/\/|\/|#|[\w.-]+\.html)/i.test(u || "") ? esc(u) : "#";
+const fmtNum = n => new Intl.NumberFormat(undefined, {notation:"compact", maximumFractionDigits:1}).format(n || 0);
+const fmtDate = (iso, o) => { try { return new Intl.DateTimeFormat(undefined, o).format(new Date(iso)); } catch { return ""; } };
+const fmtAgo = iso => { const d = (new Date(iso) - Date.now()) / 864e5, a = Math.abs(d), r = new Intl.RelativeTimeFormat(undefined, {numeric:"auto"}); if (a < 1) return "today"; if (a < 30) return r.format(Math.round(d), "day"); if (a < 365) return r.format(Math.round(d / 30), "month"); return r.format(Math.round(d / 365), "year"); };
+const hueOf = s => { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+const State = {devoCats:[], prayerCats:[]};
+const nameOf = (list, slug) => (list.find(c => c.slug === slug) || {}).name || slug;
+const Store = {
+  data:{saves:{}, prayed:{}},
+  load(){ try { const r = localStorage.getItem("ajey:v2"); if (r){ const d = JSON.parse(r); this.data = {saves:d.saves || {}, prayed:d.prayed || {}}; } } catch (_) {} },
+  persist(){ try { localStorage.setItem("ajey:v2", JSON.stringify(this.data)); } catch (_) {} },
+  list(kind, type){ return ((this.data[kind] ||= {})[type] ||= []); },
+  has(kind, type, id){ return this.list(kind, type).includes(String(id)); },
+  toggle(kind, type, id){ const a = this.list(kind, type); id = String(id); const i = a.indexOf(id); i >= 0 ? a.splice(i, 1) : a.push(id); this.persist(); return i < 0; }
+};
+Store.load();
+
+const P = {
+  search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', close:'<path d="M6 6l12 12M18 6L6 18"/>',
+  bookmark:'<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>', share:'<path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/>',
+  back:'<path d="M15 18l-6-6 6-6"/>', check:'<path d="M5 13l4 4L19 7"/>', book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/>',
+  flame:'<path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-5 .5 1.5 1.5 2 2 2 0-3-1-5 1-8z"/>',
+  lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', users:'<circle cx="9" cy="7" r="4"/><path d="M2 21v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1M17 3.1a4 4 0 0 1 0 7.8M22 21v-1a5 5 0 0 0-3.5-4.7"/>',
+  chat:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>', heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>',
+  alert:'<path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>'
+};
+const I = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n] || ""}</svg>`;
+
+let toastT;
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2600); }
+const linkFor = path => location.href.split("#")[0] + "#" + path;
+async function share({title, path}){
+  const url = linkFor(path);
+  try { if (navigator.share){ await navigator.share({title, url}); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+  try { await navigator.clipboard.writeText(url); toast("Link copied"); }
+  catch (_) { try { const ta = document.createElement("textarea"); ta.value = url; ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); toast("Link copied"); } catch (__) { toast("Copy this link: " + url); } }
+}
+
+/* =====================================================================
+   REUSABLE COMPONENTS (data in, HTML out)
+   ===================================================================== */
+function Toggle({action, type, id, base = 0, label, icon, text}){
+  return `<button class="act" type="button" data-action="${action}" data-type="${type}" data-id="${esc(id)}" data-base="${+base || 0}" aria-pressed="false" aria-label="${esc(label)}">${I(icon)}<span class="lbl">${esc(text || "")}</span>${action === "prayed" ? '<span class="cnt"></span>' : ""}</button>`;
+}
+function syncToggles(root = document){
+  $$('[data-action="save"],[data-action="prayed"]', root).forEach(b => {
+    const kind = b.dataset.action === "save" ? "saves" : "prayed", on = Store.has(kind, b.dataset.type, b.dataset.id);
+    b.setAttribute("aria-pressed", on);
+    if (kind === "saves") $(".lbl", b).textContent = on ? "Saved" : "Save";
+    else { $(".lbl", b).textContent = on ? "You prayed" : "I prayed"; $(".cnt", b).textContent = fmtNum((+b.dataset.base || 0) + (on ? 1 : 0)); }
+  });
+}
+const Chip = ({label, key, value, active}) => `<button class="chip" type="button" data-action="set-filter" data-key="${key}" data-value="${esc(value)}" aria-pressed="${!!active}">${esc(label)}</button>`;
+const Skel = (n = 3, h = 150) => Array.from({length:n}, () => `<div class="skel" style="min-height:${h}px"></div>`).join("");
+const Empty = ({title, text, action}) => `<div class="empty"><b>${esc(title)}</b><p>${esc(text || "")}</p>${action ? `<button class="btn btn-outline" type="button" data-action="${action.action}"${action.attrs || ""}>${esc(action.label)}</button>` : ""}</div>`;
+const SearchBox = ({value, placeholder}) => `<div class="search" role="search">${I("search")}<label class="sr" for="q">${esc(placeholder)}</label><input id="q" type="search" data-role="search" placeholder="${esc(placeholder)}" value="${esc(value)}" autocomplete="off" enterkeyhint="search"><button class="clear ${value ? "" : "hidden"}" type="button" data-action="clear-search" aria-label="Clear search">${I("close")}</button></div>`;
+const excerpt = d => d.body[0].length > 130 ? d.body[0].slice(0, 127).replace(/\s+\S*$/, "") + "…" : d.body[0];
+
+const DevoCard = d => `<a class="dcard" href="#/word/${encodeURIComponent(d.id)}"><div class="top"><span class="pill">${esc(nameOf(State.devoCats, d.category))}</span><span class="meta">${fmtAgo(d.publishedAt)}</span></div><h3>${esc(d.title)}</h3><p class="vref">${esc(d.reference)}</p><p class="ex">${esc(excerpt(d))}</p><p class="meta">${d.readMins} min read</p></a>`;
+const TodayCard = d => `<article class="today" aria-labelledby="todayT"><div><p class="date">Today, ${esc(fmtDate(new Date(), {weekday:"long", month:"long", day:"numeric"}))}</p><h2 id="todayT">${esc(d.title)}</h2>
+  <div class="row" style="margin-top:18px"><a class="btn btn-primary" href="#/word/${encodeURIComponent(d.id)}">READ TODAY'S DEVOTIONAL</a>${Toggle({action:"save", type:"devotional", id:d.id, label:"Save this devotional", icon:"bookmark", text:"Save"})}</div></div>
+  <div><blockquote class="verse" style="margin:0">${esc(d.verse.length > 170 ? d.verse.slice(0, 167).replace(/\s+\S*$/, "") + "…" : d.verse)}<cite>${esc(d.reference)} (${esc(d.translation)})</cite></blockquote></div></article>`;
+const PrayerCard = p => `<article class="pc"><div class="ph"><span class="pill">${esc(nameOf(State.prayerCats, p.category))}</span>${p.status === "answered" ? '<span class="pill ok">Answered</span>' : ""}</div>
+  <p class="ptext">${esc(p.text)}</p>${p.answerNote ? `<p class="answer">${esc(p.answerNote)}</p>` : ""}
+  <div class="pf"><span class="who"><b>${esc(p.displayName || "Anonymous")}</b><span class="meta">${fmtAgo(p.createdAt)}</span></span>
+  ${Toggle({action:"prayed", type:"wall", id:p.id, base:p.prayedCount, label:"I prayed for this request", icon:"flame", text:"I prayed"})}
+  <button class="rep" type="button" data-action="report" data-id="${esc(p.id)}">Report</button></div></article>`;
+const Announcement = a => `<article class="ann${a.pinned ? " pin" : ""}"><div class="head">${a.pinned ? '<span class="pill">Pinned</span>' : ""}<span class="meta">${esc(fmtDate(a.date, {day:"numeric", month:"short", year:"numeric"}))}</span></div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p>${a.link ? `<a class="linkbtn" href="${safeUrl(a.link)}">${esc(a.linkLabel || "Learn more")}</a>` : ""}</article>`;
+const Testimony = t => `<figure class="tm clamp" style="margin:0"><blockquote>${esc(t.text)}</blockquote><button class="linkbtn" type="button" data-action="toggle-more" style="align-self:flex-start;padding:0">Read more</button><figcaption class="who"><span class="avatar" style="--h:${+t.hue || hueOf(t.name)}">${esc((t.name || "A").charAt(0))}</span><span><b>${esc(t.name || "Anonymous")}</b><span class="meta">${esc(t.place || "")}</span></span></figcaption></figure>`;
+const EventCard = e => `<article class="ev"><div class="dt"><b>${esc(fmtDate(e.startsAt, {day:"numeric"}))}</b><span>${esc(fmtDate(e.startsAt, {month:"short"}))}</span></div><div class="bd"><h3>${esc(e.title)}</h3><p class="meta">${esc(fmtDate(e.startsAt, {weekday:"long", hour:"numeric", minute:"2-digit"}))}, ${esc(e.location)}</p><p>${esc(e.description)}</p>${e.rsvpOpen ? `<button class="btn btn-solid" type="button" data-action="rsvp" data-id="${esc(e.id)}">RSVP</button>` : ""}</div></article>`;
+const WA = (url, label, cls = "btn-wa") => `<a class="btn ${cls}" href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" data-action="wa" data-url="${esc(url)}">${I("chat")}${esc(label)}</a>`;
+
+/* =====================================================================
+   FORM KIT — declarative fields, validation, loading, success, error.
+   One definition per form; nothing is hard-coded in markup.
+   ===================================================================== */
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const lastSent = {};
+const Hosts = new WeakMap();
+function Field(def, f){
+  const id = `f-${def.id}-${f.name}`, hid = id + "-h", eid = id + "-e", opt = !f.required && f.type !== "checkbox" ? '<span class="opt">optional</span>' : "";
+  const desc = `${f.hint ? hid : ""} ${eid}`.trim(), val = f.value ?? "";
+  let inner = "";
+  if (f.type === "checkbox") inner = `<label class="check"><input type="checkbox" id="${id}" name="${f.name}" aria-describedby="${eid}"${val ? " checked" : ""}><span>${f.label}${f.hint ? `<small class="hint" style="display:block" id="${hid}">${esc(f.hint)}</small>` : ""}</span></label>`;
+  else if (f.type === "radio") inner = `<fieldset aria-describedby="${eid}"><legend>${esc(f.label)}</legend><div class="radios">${f.options.map(o => `<label class="radio"><input type="radio" name="${f.name}" value="${esc(o.value)}"${o.value === val ? " checked" : ""}><span><b>${esc(o.label)}</b><small>${esc(o.hint || "")}</small></span></label>`).join("")}</div></fieldset>`;
+  else if (f.type === "select") inner = `<label for="${id}">${esc(f.label)}${opt}</label>${f.hint ? `<p class="hint" id="${hid}">${esc(f.hint)}</p>` : ""}<select id="${id}" name="${f.name}" aria-describedby="${desc}"${f.required ? ' aria-required="true"' : ""}><option value="">${esc(f.placeholder || "Choose one")}</option>${f.options.map(o => `<option value="${esc(o.value)}"${o.value === val ? " selected" : ""}>${esc(o.label)}</option>`).join("")}</select>`;
+  else if (f.type === "textarea") inner = `<label for="${id}">${esc(f.label)}${opt}</label>${f.hint ? `<p class="hint" id="${hid}">${esc(f.hint)}</p>` : ""}<textarea id="${id}" name="${f.name}" placeholder="${esc(f.placeholder || "")}" aria-describedby="${desc}"${f.required ? ' aria-required="true"' : ""}>${esc(val)}</textarea><span class="count" data-count-for="${f.name}" aria-hidden="true"></span>`;
+  else inner = `<label for="${id}">${esc(f.label)}${opt}</label>${f.hint ? `<p class="hint" id="${hid}">${esc(f.hint)}</p>` : ""}<input id="${id}" name="${f.name}" type="${f.type || "text"}" value="${esc(val)}" placeholder="${esc(f.placeholder || "")}" autocomplete="${f.autocomplete || "off"}"${f.inputmode ? ` inputmode="${f.inputmode}"` : ""} aria-describedby="${desc}"${f.required ? ' aria-required="true"' : ""}>`;
+  return `<div class="field" data-field="${f.name}">${inner}<p class="err" id="${eid}"></p></div>`;
+}
+const FormHTML = def => `<form class="form" novalidate data-form="${def.id}" aria-label="${esc(def.title || def.id)}">
+  <div class="banner error" role="alert" hidden data-banner></div>
+  ${def.fields.map(f => Field(def, f)).join("")}
+  <div class="hp" aria-hidden="true"><label>Leave this field empty<input name="hp" tabindex="-1" autocomplete="off"></label></div>
+  ${def.footer || ""}
+  <button class="btn btn-primary block" type="submit"><span class="spin" aria-hidden="true"></span><span class="lbl">${esc(def.submitLabel)}</span></button></form>`;
+
+function mountForm(host, def, ctx = {}){
+  host.dataset.host = "1"; Hosts.set(host, {def, ctx}); host.innerHTML = FormHTML(def);
+  const form = $("form", host), btn = $('button[type="submit"]', form), banner = $("[data-banner]", form);
+  let loading = false;
+  const el = name => $(`[data-field="${name}"]`, form);
+  const raw = () => { const v = {}; def.fields.forEach(f => {
+    if (f.type === "checkbox") v[f.name] = !!$(`[name="${f.name}"]`, form).checked;
+    else if (f.type === "radio") v[f.name] = ($(`[name="${f.name}"]:checked`, form) || {}).value || "";
+    else v[f.name] = $(`[name="${f.name}"]`, form).value.trim(); }); return v; };
+  const visible = (f, vals) => !f.showIf || f.showIf(vals);
+  const applyVisibility = () => { const vals = raw(); def.fields.forEach(f => { const on = visible(f, vals), w = el(f.name); w.hidden = !on; $$("input,select,textarea", w).forEach(i => i.disabled = !on); }); };
+  const check = (f, vals) => {
+    const v = vals[f.name];
+    if (f.required && (f.type === "checkbox" ? !v : !v)) return f.requiredMsg || `${f.label.replace(/<[^>]+>/g, "")} is required.`;
+    if (!v) return "";
+    if (f.type === "email" && !EMAIL.test(v)) return "Enter a valid email address, like name@example.com.";
+    if (f.min && v.length < f.min) return `Please write a little more (at least ${f.min} characters, you have ${v.length}).`;
+    const max = typeof f.max === "function" ? f.max(vals) : f.max;
+    if (max && v.length > max) return `Please shorten this to ${max} characters or fewer (you have ${v.length}).`;
+    return f.validate ? (f.validate(v, vals) || "") : "";
+  };
+  const setErr = (f, msg) => { const w = el(f.name), e = $(".err", w); e.textContent = msg; w.classList.toggle("has-error", !!msg); $$("input,select,textarea", w).forEach(i => i.setAttribute("aria-invalid", !!msg)); };
+  const count = f => { const c = $(`[data-count-for="${f.name}"]`, form); if (!c) return; const vals = raw(), max = typeof f.max === "function" ? f.max(vals) : f.max, n = vals[f.name].length; c.textContent = max ? `${n} / ${max}` : n; c.classList.toggle("over", !!max && n > max); };
+  const validateAll = () => { const vals = raw(), bad = []; def.fields.forEach(f => { if (!visible(f, vals)) { setErr(f, ""); return; } const m = check(f, vals); setErr(f, m); if (m) bad.push(f); }); return {vals, bad}; };
+  const showBanner = (title, small) => { banner.hidden = false; banner.innerHTML = `${I("alert")}<span>${esc(title)}${small ? `<small>${esc(small)}</small>` : ""}</span>`; };
+  const setLoading = on => { loading = on; btn.disabled = on; btn.setAttribute("aria-busy", on); $(".lbl", btn).textContent = on ? (def.loadingLabel || "Sending…") : def.submitLabel; form.setAttribute("aria-busy", on); };
+
+  def.fields.forEach(f => { if (f.type === "textarea") count(f); });
+  applyVisibility();
+  form.addEventListener("focusout", e => { const w = e.target.closest("[data-field]"); if (!w) return; const f = def.fields.find(x => x.name === w.dataset.field), vals = raw(); if (f && visible(f, vals)) setErr(f, check(f, vals)); });
+  form.addEventListener("input", e => { const w = e.target.closest("[data-field]"); if (!w) return; const f = def.fields.find(x => x.name === w.dataset.field); if (f && f.type === "textarea") count(f); if (w.classList.contains("has-error")) setErr(f, check(f, raw())); });
+  form.addEventListener("change", () => { applyVisibility(); const vals = raw(); def.fields.forEach(f => { if (f.type === "textarea") count(f); if (el(f.name).classList.contains("has-error") && visible(f, vals)) setErr(f, check(f, vals)); }); });
+  form.addEventListener("submit", async e => {
+    e.preventDefault(); if (loading) return; banner.hidden = true;
+    const {vals, bad} = validateAll();
+    if (bad.length){ showBanner(`Please check ${bad.length === 1 ? "one field" : bad.length + " fields"} below.`); const first = $("input:not([type=hidden]),select,textarea", el(bad[0].name)); if (first) first.focus(); return; }
+    const hp = $('[name="hp"]', form).value;
+    const succeed = (res) => { host.innerHTML = `<div class="success" tabindex="-1" role="status">${def.success(res, vals, ctx)}</div>`; const s = $(".success", host); s.focus({preventScroll:true}); s.scrollIntoView({block:"nearest"}); };
+    if (hp){ succeed({reference:"AJ-" + rid(5), status:"received"}); return; }        // bots: look successful, send nothing
+    if (Date.now() - (lastSent[def.id] || 0) < CONFIG.cooldownMs){ showBanner("Please wait a moment before sending again.", "This helps us keep the community safe."); return; }
+    const payload = {}; def.fields.forEach(f => { if (visible(f, vals)) payload[f.name] = vals[f.name]; });
+    setLoading(true);
+    try {
+      const res = await Promise.race([def.submit(payload, ctx), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), CONFIG.submitTimeoutMs))]);
+      lastSent[def.id] = Date.now(); succeed(res || {});
+    } catch (err) {
+      setLoading(false);
+      showBanner(err && err.message === "timeout" ? "This is taking too long." : "We could not send this right now.", "Your words are still here and nothing was lost. Check your connection and try again.");
+      banner.scrollIntoView({block:"nearest"});
+    }
+  });
+  return form;
+}
+
+/* ---- form definitions ---- */
+const PRIV = {
+  contact: /(\b[\w.+-]+@[\w-]+\.[\w.]+\b)|(\+?\d[\d\s\-().]{7,}\d)|(https?:\/\/|www\.)/i
+};
+const PrivacyNotice = () => `<div class="notice">${I("lock")}<div><b>Your privacy</b><p>Private by default. You choose who can see your request.</p>
+  <ul><li>Private requests are seen only by our prayer team.</li><li>Prayer Wall posts are reviewed by our team before they appear.</li><li>We never show your email, and we never show your name if you choose anonymous.</li><li>Keep your reference code if you ever want a request removed.</li></ul></div></div>
+  <div class="notice alert">${I("alert")}<div><p>If you or someone else is in immediate danger, please contact your local emergency services first.</p></div></div>`;
+const FormDefs = {
+  prayer: () => ({
+    id:"prayer", title:"Prayer request", submitLabel:"SEND MY REQUEST", loadingLabel:"Sending your request…",
+    fields:[
+      {name:"anonymous", type:"checkbox", label:"<b>Keep me anonymous</b>", hint:"We will not ask for your name or email."},
+      {name:"name", label:"First name", required:true, requiredMsg:"Please tell us your first name, or choose anonymous.", max:40, autocomplete:"given-name", showIf:v => !v.anonymous},
+      {name:"email", type:"email", label:"Email", hint:"Only if you would like a private reply from a prayer partner. It is never shown publicly.", autocomplete:"email", inputmode:"email", showIf:v => !v.anonymous},
+      {name:"category", type:"select", label:"What is this about?", required:true, requiredMsg:"Please choose a topic so we can pray well.", options:SAMPLE.prayerCats.map(c => ({value:c.slug, label:c.name})), placeholder:"Choose a topic"},
+      {name:"text", type:"textarea", label:"Your prayer request", hint:"Share as much or as little as you like.", required:true, requiredMsg:"Please write your request.", min:10, max:v => v.visibility === "wall" ? 500 : 1000,
+        validate:(v, vals) => vals.visibility === "wall" && PRIV.contact.test(v) ? "For the Prayer Wall, please remove emails, phone numbers and web links." : ""},
+      {name:"visibility", type:"radio", label:"Who can see this?", value:"private", options:[
+        {value:"private", label:"Only the prayer team", hint:"Private. This is never shown on the website."},
+        {value:"wall", label:"Share on the Prayer Wall", hint:"Others can pray with you. It appears only after our team reviews it. Use first names only, and avoid health details about other people."}]},
+      {name:"consent", type:"checkbox", label:"I have read the privacy notice and I am happy for my request to be handled this way.", required:true, requiredMsg:"Please confirm you have read the privacy notice."}
+    ],
+    footer:PrivacyNotice(),
+    submit:p => API.submitPrayer(p),
+    success:(res, vals) => `<div class="tick">${I("check")}</div><h2>We have received your request</h2>
+      <p>${res.status === "pending_review" ? "Our team will review it before it appears on the Prayer Wall. Until then it stays private, and our prayer team will pray for you." : "Our prayer team will pray for you. Only they will see it."}</p>
+      <blockquote class="verse" style="margin:0">Casting all your care upon him; for he careth for you.<cite>1 Peter 5:7 (KJV)</cite></blockquote>
+      <p class="ref">Your reference: <b>${esc(res.reference || "")}</b><br>Keep this if you would like your request removed.</p>
+      <div class="btns"><a class="btn btn-primary" href="#/prayer/wall">PRAY FOR OTHERS</a><button class="btn btn-outline" type="button" data-action="form-reset">Send another request</button><a class="btn btn-outline" href="#/prayer">Back to Prayer Center</a></div>`
+  }),
+  testimony: () => ({
+    id:"testimony", title:"Share your testimony", submitLabel:"SEND MY TESTIMONY", loadingLabel:"Sending…",
+    fields:[
+      {name:"anonymous", type:"checkbox", label:"<b>Share anonymously</b>", hint:"Your name will not be shown."},
+      {name:"name", label:"First name", required:true, requiredMsg:"Please add your first name, or choose anonymous.", max:40, autocomplete:"given-name", showIf:v => !v.anonymous},
+      {name:"place", label:"City or town", max:60, showIf:v => !v.anonymous},
+      {name:"text", type:"textarea", label:"Your testimony", hint:"What has Jesus done in your life?", required:true, requiredMsg:"Please write your testimony.", min:40, max:1500, validate:v => PRIV.contact.test(v) ? "Please remove emails, phone numbers and web links." : ""},
+      {name:"consent", type:"checkbox", label:"I am happy for this testimony to be shared after it is reviewed.", required:true, requiredMsg:"Please confirm you are happy for it to be shared."}
+    ],
+    footer:`<p class="hint">Every testimony is read by our team before it is published. We may lightly edit for length.</p>`,
+    submit:p => API.submitTestimony(p),
+    success:res => `<div class="tick">${I("check")}</div><h2>Thank you for sharing</h2><p>Your testimony has been received. Our team will review it before it is shared.</p><p class="ref">Reference: <b>${esc(res.reference || "")}</b></p><div class="btns"><button class="btn btn-primary" type="button" data-action="modal-close">DONE</button></div>`
+  }),
+  rsvp: ev => ({
+    id:"rsvp-" + ev.id, title:"RSVP", submitLabel:"CONFIRM MY SPOT", loadingLabel:"Saving your spot…",
+    fields:[
+      {name:"name", label:"Your name", required:true, max:60, autocomplete:"name"},
+      {name:"contact", label:"Email or WhatsApp number", hint:"So we can send reminders and updates.", required:true, autocomplete:"email",
+        validate:v => (EMAIL.test(v) || v.replace(/\D/g, "").length >= 9) ? "" : "Enter a valid email address or phone number."},
+      {name:"guests", type:"select", label:"How many people are coming?", required:true, value:"1", options:[1,2,3,4,5].map(n => ({value:String(n), label:n === 1 ? "Just me" : n + " people"}))}
+    ],
+    submit:p => API.rsvp(ev.id, p),
+    success:(res, vals) => `<div class="tick">${I("check")}</div><h2>You are on the list</h2><p>${esc(ev.title)} on ${esc(fmtDate(ev.startsAt, {weekday:"long", day:"numeric", month:"long"}))}. We will send a reminder.</p><p class="ref">Reference: <b>${esc(res.reference || "")}</b></p><div class="btns"><button class="btn btn-primary" type="button" data-action="modal-close">DONE</button></div>`
+  }),
+  report: id => ({
+    id:"report-" + id, title:"Report a post", submitLabel:"SEND REPORT", loadingLabel:"Sending report…",
+    fields:[
+      {name:"reason", type:"select", label:"What is the problem?", required:true, requiredMsg:"Please choose a reason.", options:[{value:"personal", label:"It shares personal information"},{value:"unkind", label:"It is unkind or inappropriate"},{value:"spam", label:"It looks like spam"},{value:"other", label:"Something else"}], placeholder:"Choose a reason"},
+      {name:"note", type:"textarea", label:"Anything else we should know?", max:300}
+    ],
+    footer:`<p class="hint">Reports are private. Our team will review the post and remove it if needed.</p>`,
+    submit:p => API.report(id, p),
+    success:() => `<div class="tick">${I("check")}</div><h2>Thank you</h2><p>Our team will review this post. Thank you for helping keep this space safe and kind.</p><div class="btns"><button class="btn btn-primary" type="button" data-action="modal-close">DONE</button></div>`
+  })
+};
+
+/* ---- modal ---- */
+const Modal = {
+  el:null, last:null,
+  open(title, def, ctx){
+    this.close(true); this.last = document.activeElement;
+    const m = document.createElement("div"); m.className = "modal"; m.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mT"><div class="sheet-head"><h2 id="mT">${esc(title)}</h2><button class="xbtn" type="button" data-action="modal-close" aria-label="Close">${I("close")}</button></div><div data-host></div></div>`;
+    m.addEventListener("click", e => { if (e.target === m) Modal.close(); });
+    document.body.appendChild(m); this.el = m; $("#shell").inert = true;
+    mountForm($("[data-host]", m), def, ctx); const f = $("input:not([type=checkbox]):not([tabindex]),select,textarea", m); if (f) f.focus();
+  },
+  close(silent){ if (!this.el) return; this.el.remove(); this.el = null; $("#shell").inert = false; if (!silent && this.last && this.last.focus) this.last.focus(); }
+};
+
+/* =====================================================================
+   ACTIONS (event delegation on data-action)
+   ===================================================================== */
+const View = {state:{}, set(){}, reset(){}, more(){}, reload(){}};
+const Actions = {
+  save(el){ const on = Store.toggle("saves", el.dataset.type, el.dataset.id); syncToggles(); API.react("save", el.dataset.type, el.dataset.id, on); toast(on ? "Saved to your library" : "Removed from saved"); },
+  prayed(el){ const on = Store.toggle("prayed", "wall", el.dataset.id); syncToggles(); API.prayed(el.dataset.id, on); if (on) toast("Thank you for praying"); },
+  share(el){ share({title:el.dataset.title, path:el.dataset.path}); },
+  "set-filter"(el){ View.set(el.dataset.key, el.dataset.value); },
+  "reset-filters"(){ View.reset(); }, "load-more"(){ View.more(); }, reload(el){ View.reload(el.dataset.section); },
+  "clear-search"(){ const i = $('[data-role="search"]'); i.value = ""; i.focus(); View.set("q", ""); },
+  "toggle-more"(el){ const c = el.closest(".tm").classList.toggle("clamp"); el.textContent = c ? "Read more" : "Show less"; },
+  wa(el, e){ if (/REPLACE_WITH/.test(el.dataset.url)){ e.preventDefault(); toast("Add your WhatsApp invite link in CONFIG to turn this on"); } },
+  rsvp(el){ const ev = Ctx.events.find(x => x.id === el.dataset.id); if (ev) Modal.open("RSVP: " + ev.title, FormDefs.rsvp(ev), ev); },
+  "share-testimony"(){ Modal.open("Share your testimony", FormDefs.testimony()); },
+  report(el){ Modal.open("Report a post", FormDefs.report(el.dataset.id)); },
+  "modal-close"(){ Modal.close(); },
+  "form-reset"(el){ const host = el.closest("[data-host]"); if (host){ const h = Hosts.get(host); mountForm(host, h.def, h.ctx); const f = $("input:not([type=checkbox]):not([tabindex]),select,textarea", host); if (f) f.focus(); } }
+};
+const Ctx = {events:[]};
+document.addEventListener("click", e => { const el = e.target.closest("[data-action]"); if (el && Actions[el.dataset.action]) Actions[el.dataset.action](el, e); });
+let searchT;
+document.addEventListener("input", e => { const s = e.target.closest('[data-role="search"]'); if (s){ $(".clear", s.parentNode).classList.toggle("hidden", !s.value); clearTimeout(searchT); searchT = setTimeout(() => View.set("q", s.value.trim()), 250); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") Modal.close(); });
+
+/* =====================================================================
+   ROUTER + VIEWS
+   #/word  #/word/:id  #/prayer  #/prayer/request  #/prayer/wall  #/community
+   ===================================================================== */
+const app = $("#app");
+let token = 0;
+function paint(el, html){ el.innerHTML = html; syncToggles(el); }
+function setUrl(path, params){ const qs = new URLSearchParams(); Object.entries(params).forEach(([k, v]) => { if (v) qs.set(k, v); }); history.replaceState(null, "", "#" + path + (qs.toString() ? "?" + qs : "")); }
+
+/* ---- WORD: library ---- */
+async function viewWord(qs){
+  document.title = "Word — AJEY CJEY"; const my = ++token;
+  State.devoCats = await API.devoCategories(); if (my !== token) return;
+  const st = {q:qs.get("q") || "", cat:qs.get("cat") || "all", page:1, items:[], total:0};
+  app.innerHTML = `<section class="phero word"><div class="wrap"><h1>Word</h1><p class="lead">A short reading, a prayer and a few questions to carry into your day.</p>${SearchBox({value:st.q, placeholder:"Search by title, verse or topic"})}</div></section>
+    <div class="wrap overlap" id="today"></div>
+    <div class="bar"><div class="chips" id="chips" role="group" aria-label="Categories"></div></div>
+    <div class="wrap"><div class="resultbar"><h2 id="count"></h2></div><div class="dgrid" id="grid"></div><div class="more-wrap" id="more"></div></div>`;
+  const chips = () => paint($("#chips"), Chip({label:"All", key:"cat", value:"all", active:st.cat === "all"}) + State.devoCats.map(c => Chip({label:c.name, key:"cat", value:c.slug, active:st.cat === c.slug})).join("") + Chip({label:"Saved", key:"cat", value:"saved", active:st.cat === "saved"}));
+  chips();
+  const isDefault = () => !st.q && st.cat === "all";
+  async function refresh(append){
+    const run = ++token;
+    if (!append){ st.page = 1; st.items = []; $("#grid").innerHTML = Skel(6, 190); $("#more").innerHTML = ""; }
+    const params = {q:st.q, category:["all", "saved"].includes(st.cat) ? "" : st.cat, page:st.page, pageSize:CONFIG.pageSize};
+    if (st.cat === "saved") params.ids = Store.list("saves", "devotional").join(",");
+    let res;
+    try { res = st.cat === "saved" && !params.ids ? {items:[], total:0} : await API.devos(params); }
+    catch (_) { if (run === token) paint($("#grid"), Empty({title:"Could not load devotionals", text:"Please check your connection and try again.", action:{action:"reset-filters", label:"Try again"}})); return; }
+    if (run !== token) return;
+    st.items = append ? st.items.concat(res.items) : res.items; st.total = res.total;
+    $("#count").textContent = st.q ? `${st.total} result${st.total === 1 ? "" : "s"} for “${st.q}”` : st.cat === "saved" ? `Saved (${st.total})` : st.cat === "all" ? "Devotional library" : `${nameOf(State.devoCats, st.cat)} (${st.total})`;
+    paint($("#grid"), st.items.length ? st.items.map(DevoCard).join("") : Empty(st.cat === "saved" && !st.q ? {title:"Nothing saved yet", text:"Tap Save on any devotional and it will wait for you here.", action:{action:"reset-filters", label:"Browse all devotionals"}} : {title:"No devotionals found", text:"Try a different word or clear your search.", action:{action:"reset-filters", label:"Clear search"}}));
+    $("#more").innerHTML = st.items.length < st.total ? `<button class="btn btn-outline" type="button" data-action="load-more">Show more</button>` : "";
+    if (!append){ const t = $("#today"); if (isDefault()){ if (!t.innerHTML){ const d = await API.today(); if (run === token && d) paint(t, TodayCard(d)); } } else t.innerHTML = ""; }
+  }
+  View.state = st;
+  View.set = (k, v) => { st[k] = v; setUrl("/word", {q:st.q, cat:st.cat === "all" ? "" : st.cat}); if (k === "cat") chips(); refresh(false); };
+  View.reset = () => { st.q = ""; st.cat = "all"; const i = $('[data-role="search"]'); i.value = ""; $(".clear", i.parentNode).classList.add("hidden"); chips(); setUrl("/word", {}); refresh(false); };
+  View.more = () => { st.page++; refresh(true); };
+  await refresh(false);
+}
+
+/* ---- WORD: detail ---- */
+async function viewDevo(id){
+  const my = ++token; app.innerHTML = `<div class="wrap narrow" style="padding-top:24px">${Skel(3, 160)}</div>`;
+  if (!State.devoCats.length) State.devoCats = await API.devoCategories();
+  const d = await API.devo(id); if (my !== token) return;
+  if (!d){ app.innerHTML = `<div class="wrap narrow" style="padding-top:28px">${Empty({title:"We could not find that devotional", text:"It may have been moved or the link is wrong."})}<p style="text-align:center;margin-top:16px"><a class="btn btn-primary" href="#/word">BACK TO WORD</a></p></div>`; return; }
+  document.title = d.title + " — AJEY CJEY";
+  paint(app, `<div class="wrap narrow article"><a class="back" href="#/word">${I("back")}Back to Word</a>
+    <span class="pill" style="margin-top:6px">${esc(nameOf(State.devoCats, d.category))}</span>
+    <h1>${esc(d.title)}</h1>
+    <div class="byline"><span>${esc(fmtDate(d.publishedAt, {weekday:"long", day:"numeric", month:"long", year:"numeric"}))}</span><span>${d.readMins} min read</span><span>${esc(d.author)}</span></div>
+    <blockquote class="verse" style="margin:0">${esc(d.verse)}<cite>${esc(d.reference)} (${esc(d.translation)})</cite></blockquote>
+    <div class="prose">${d.body.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+    <section class="box" aria-labelledby="pr"><h2 id="pr">A prayer</h2><p>${esc(d.prayer)}</p></section>
+    <section class="box" aria-labelledby="rf"><h2 id="rf">Reflect</h2><ul>${d.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul></section>
+    <div class="actions">${Toggle({action:"save", type:"devotional", id:d.id, label:"Save this devotional", icon:"bookmark", text:"Save"})}
+      <button class="act" type="button" data-action="share" data-title="${esc(d.title)}" data-path="/word/${encodeURIComponent(d.id)}">${I("share")}Share</button></div>
+    <nav class="pager" aria-label="More devotionals">${d.older ? `<a href="#/word/${encodeURIComponent(d.older.id)}"><small>Older</small><b>${esc(d.older.title)}</b></a>` : "<span></span>"}${d.newer ? `<a class="newer" href="#/word/${encodeURIComponent(d.newer.id)}"><small>Newer</small><b>${esc(d.newer.title)}</b></a>` : ""}</nav></div>`);
+  window.scrollTo(0, 0);
+}
+
+/* ---- PRAYER: center ---- */
+async function viewPrayer(){
+  document.title = "Prayer Center — AJEY CJEY"; ++token;
+  paint(app, `<section class="phero prayer"><div class="wrap"><h1>You do not have to carry it alone</h1><p class="lead">Share what is on your heart. Our prayer team will pray for you, and you choose who sees it.</p>
+    <div class="btns"><a class="btn btn-primary" href="#/prayer/request">REQUEST PRAYER</a><a class="btn btn-ghost" href="#/prayer/wall">PRAYER WALL</a></div></div></section>
+    <div class="wrap">
+      <section class="sec"><div class="hub">
+        <div class="hubcard"><div class="ic">${I("heart")}</div><h2>Ask for prayer</h2><p>Tell us what you are facing. You can stay anonymous, and your request stays private unless you choose otherwise.</p><a class="btn btn-solid" href="#/prayer/request">SHARE A REQUEST</a></div>
+        <div class="hubcard"><div class="ic">${I("users")}</div><h2>Pray for others</h2><p>Read requests from the community and tell someone they are not alone. Every post is reviewed by our team.</p><a class="btn btn-solid" href="#/prayer/wall">VISIT THE WALL</a></div></div></section>
+      <section class="sec"><div class="sec-head"><h2>How it works</h2></div><ol class="steps">
+        <li><div><b>You share</b><span>Write your request and choose who can see it.</span></div></li>
+        <li><div><b>We pray</b><span>Our prayer team prays for every request we receive.</span></div></li>
+        <li><div><b>Others join you</b><span>If you choose the Prayer Wall, we review it first, then the community can pray with you.</span></div></li></ol></section>
+      <section class="sec">${PrivacyNotice()}</section></div>`);
+}
+
+/* ---- PRAYER: request form ---- */
+async function viewPrayerRequest(){
+  document.title = "Request prayer — AJEY CJEY"; ++token;
+  paint(app, `<div class="wrap narrow" style="padding-top:22px"><a class="back" href="#/prayer">${I("back")}Prayer Center</a>
+    <header style="margin:8px 0 22px"><h1 style="font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,7vw,2.8rem);line-height:1.05;letter-spacing:-.02em">Request prayer</h1><p class="meta" style="margin-top:10px;font-size:1.02rem">It takes about a minute. Only share what you are comfortable sharing.</p></header>
+    <div class="formcard" id="host"></div></div>`);
+  State.prayerCats = await API.prayerCategories();
+  mountForm($("#host"), FormDefs.prayer());
+  window.scrollTo(0, 0);
+}
+
+/* ---- PRAYER: wall ---- */
+async function viewPrayerWall(qs){
+  document.title = "Prayer Wall — AJEY CJEY"; const my = ++token;
+  State.prayerCats = await API.prayerCategories(); if (my !== token) return;
+  const st = {cat:qs.get("cat") || "all", page:1, items:[], total:0};
+  paint(app, `<section class="phero prayer sub"><div class="wrap"><h1>Prayer Wall</h1><p class="lead">Pray for others, and let someone know they are not alone.</p></div></section>
+    <div class="wrap" style="margin-top:22px"><div class="notice">${I("shield")}<div><b>A moderated space</b><p>Every post is reviewed by our team before it appears. We never show emails or full names, and you can report anything that does not feel right.</p></div></div></div>
+    <div class="bar"><div class="chips" id="chips" role="group" aria-label="Prayer topics"></div></div>
+    <div class="wrap"><div class="resultbar" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h2 id="count">Prayer requests</h2><a class="btn btn-primary" href="#/prayer/request" style="min-height:44px;padding:0 20px">ADD YOUR REQUEST</a></div><div class="wall" id="grid"></div><div class="more-wrap" id="more"></div></div>`);
+  const chips = () => paint($("#chips"), Chip({label:"All", key:"cat", value:"all", active:st.cat === "all"}) + Chip({label:"Answered", key:"cat", value:"answered", active:st.cat === "answered"}) + State.prayerCats.filter(c => c.slug !== "other").map(c => Chip({label:c.name, key:"cat", value:c.slug, active:st.cat === c.slug})).join(""));
+  chips();
+  async function refresh(append){
+    const run = ++token;
+    if (!append){ st.page = 1; st.items = []; $("#grid").innerHTML = Skel(4, 190); $("#more").innerHTML = ""; }
+    const params = {status:st.cat === "answered" ? "answered" : "", category:["all", "answered"].includes(st.cat) ? "" : st.cat, page:st.page, pageSize:CONFIG.wallPageSize};
+    let res;
+    try { res = await API.wall(params); } catch (_) { if (run === token) paint($("#grid"), Empty({title:"Could not load the Prayer Wall", text:"Please check your connection and try again.", action:{action:"reset-filters", label:"Try again"}})); return; }
+    if (run !== token) return;
+    st.items = append ? st.items.concat(res.items) : res.items; st.total = res.total;
+    paint($("#grid"), st.items.length ? st.items.map(PrayerCard).join("") : Empty({title:"No requests here yet", text:"Be the first to share, or check another topic.", action:{action:"reset-filters", label:"Show all requests"}}));
+    $("#more").innerHTML = st.items.length < st.total ? `<button class="btn btn-outline" type="button" data-action="load-more">Show more requests</button>` : "";
+  }
+  View.state = st;
+  View.set = (k, v) => { st[k] = v; setUrl("/prayer/wall", {cat:st.cat === "all" ? "" : st.cat}); chips(); refresh(false); };
+  View.reset = () => { st.cat = "all"; chips(); setUrl("/prayer/wall", {}); refresh(false); };
+  View.more = () => { st.page++; refresh(true); };
+  await refresh(false);
+}
+
+/* ---- COMMUNITY ---- */
+async function viewCommunity(){
+  document.title = "Community — AJEY CJEY"; const my = ++token;
+  paint(app, `<section class="phero community"><div class="wrap"><h1>Gospel to the World</h1><p class="lead">A community of believers who pray together, share stories and take the good news further.</p><div class="btns" id="heroBtns"></div></div></section>
+    <div class="wrap">
+      <div class="overlap" data-sec="community">${Skel(1, 220)}</div>
+      <section class="sec" data-sec="announcements"><div class="sec-head"><h2>Announcements</h2></div><div class="alist" data-body>${Skel(3, 100)}</div></section>
+      <section class="sec" data-sec="testimonies"><div class="sec-head"><h2>Testimonies</h2><p>Real stories of Jesus at work in real lives.</p></div><div class="tgrid" data-body>${Skel(3, 200)}</div>
+        <div class="more-wrap"><button class="btn btn-solid" type="button" data-action="share-testimony">SHARE YOUR TESTIMONY</button></div></section>
+      <section class="sec" data-sec="youth">${Skel(1, 240)}</section>
+      <section class="sec" data-sec="events"><div class="sec-head"><h2>Community events</h2><p>Come along, bring a friend, and let us know you are coming.</p></div><div class="elist" data-body>${Skel(4, 130)}</div></section></div>`);
+  const sec = k => $(`[data-sec="${k}"]`), body = k => $("[data-body]", sec(k));
+  const fail = (k, msg) => { const t = k === "community" || k === "youth" ? sec(k) : body(k); paint(t, Empty({title:msg, text:"Please check your connection and try again.", action:{action:"reload", label:"Try again", attrs:` data-section="${k}"`}})); };
+  const loaders = {
+    async community(){ const c = await API.community(); paint(sec("community"), `<div class="cta-card"><div><h2>Join us on WhatsApp</h2><p>${esc(c.text)}</p><div style="margin-top:20px">${WA(CONFIG.whatsappCommunityUrl, "JOIN ON WHATSAPP")}</div></div>
+      <details><summary>Community guidelines</summary><ul>${(c.guidelines || []).map(g => `<li>${esc(g)}</li>`).join("")}</ul></details></div>`);
+      $("#heroBtns").innerHTML = WA(CONFIG.whatsappCommunityUrl, "JOIN ON WHATSAPP") + `<a class="btn btn-ghost" href="#events" data-scroll="events">SEE EVENTS</a>`; },
+    async announcements(){ const r = await API.announcements(); const a = [...r.items].sort((x, y) => (y.pinned ? 1 : 0) - (x.pinned ? 1 : 0) || new Date(y.date) - new Date(x.date)); paint(body("announcements"), a.length ? a.map(Announcement).join("") : Empty({title:"No announcements right now", text:"Check back soon."})); },
+    async testimonies(){ const r = await API.testimonies(); paint(body("testimonies"), r.items.length ? r.items.map(Testimony).join("") : Empty({title:"No testimonies yet", text:"Be the first to share what God has done."})); },
+    async youth(){ const y = await API.youth(); paint(sec("youth"), `<div class="youth"><div><h2>${esc(y.title)}</h2><p>${esc(y.text)}</p><p style="margin-top:12px"><b>${esc(y.meetsWhen)}</b></p><div style="margin-top:20px">${WA(CONFIG.whatsappYouthUrl, "JOIN THE YOUTH GROUP")}</div><p class="safe">Youth spaces are led and moderated by vetted adult leaders.</p></div>
+      <ul>${(y.highlights || []).map(h => `<li><b>${esc(h.title)}</b><span>${esc(h.text)}</span></li>`).join("")}</ul></div>`); },
+    async events(){ const r = await API.events(); const a = [...r.items].sort((x, y) => new Date(x.startsAt) - new Date(y.startsAt)); Ctx.events = a; paint(body("events"), a.length ? a.map(EventCard).join("") : Empty({title:"No events scheduled yet", text:"New dates are added often."})); }
+  };
+  const run = async k => { try { await loaders[k](); } catch (_) { if (my === token) fail(k, "Could not load this section"); } };
+  Object.keys(loaders).forEach(run);
+  View.reload = k => run(k);
+}
+document.addEventListener("click", e => { const s = e.target.closest("[data-scroll]"); if (s){ e.preventDefault(); const t = $(`[data-sec="${s.dataset.scroll}"]`); if (t) t.scrollIntoView({behavior:"smooth"}); } });
+
+/* ---- router ---- */
+const ROUTES = [
+  [/^\/word$/, viewWord], [/^\/word\/([^/]+)$/, (qs, id) => viewDevo(decodeURIComponent(id))],
+  [/^\/prayer$/, viewPrayer], [/^\/prayer\/request$/, viewPrayerRequest], [/^\/prayer\/wall$/, viewPrayerWall],
+  [/^\/community$/, viewCommunity]
+];
+async function route(){
+  Modal.close(true);
+  const raw = location.hash.slice(1) || "/word", [path, q] = raw.split("?"), qs = new URLSearchParams(q || "");
+  const tab = path.split("/")[1];
+  View.state = {}; View.set = () => {}; View.reset = () => {}; View.more = () => {}; View.reload = () => {};
+  window.scrollTo(0, 0);
+  for (const [re, fn] of ROUTES){ const m = path.match(re); if (m){ await fn(qs, ...m.slice(1)); return; } }
+  app.innerHTML = `<div class="wrap" style="padding-top:28px">${Empty({title:"Page not found", action:{action:"reset-filters", label:"Back to Word"}})}</div>`; View.reset = () => { location.hash = "#/word"; };
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+
+<script>
+/* shared nav: menu toggle + current-page marker */
+(function(){
+  const burger=document.getElementById("burger"), drawer=document.getElementById("drawer");
+  function setMenu(o){burger.setAttribute("aria-expanded",o);burger.setAttribute("aria-label",o?"Close menu":"Open menu");drawer.classList.toggle("open",o);drawer.setAttribute("aria-hidden",!o);document.documentElement.style.overflow=o?"hidden":"";}
+  burger.addEventListener("click",()=>setMenu(burger.getAttribute("aria-expanded")!=="true"));
+  drawer.addEventListener("click",e=>{if(e.target.closest("a"))setMenu(false)});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
+  matchMedia("(min-width:1000px)").addEventListener("change",e=>{if(e.matches)setMenu(false)});
+  const page=location.pathname.split("/").pop()||"index.html";
+  function mark(){
+    const h=location.hash;
+    const cur=page==="watch.html"?(h.startsWith("#/listen")?"listen":"watch"):
+      page==="word.html"?(h.startsWith("#/prayer")?"prayer":h.startsWith("#/community")?"community":"word"):
+      page==="account.html"?"me":"";
+    document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  }
+  addEventListener("hashchange",mark);mark();
+})();
+</script>
+</body>
+</html>

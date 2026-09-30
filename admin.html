@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<title>Admin — AJEY CJEY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0d1033;--night-2:#171b57;--dawn:#f2a33a;--dawn-2:#ffd58a;--bg:#f5f6fb;--sf:#fff;--sf2:#eceef8;--ink:#0f1233;--ink2:#4a4f78;--line:#dcdff0;--acc:#c9771a;--err:#b3261e;--errbg:#fdecea;--ok:#1b7a46;--okbg:#e6f5ec;--warn:#8a5a00;--warnbg:#fff3d6;--sh:0 1px 2px rgba(15,18,51,.06),0 10px 30px -14px rgba(15,18,51,.25);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root{--bg:#0a0c26;--sf:#12153f;--sf2:#1a1e52;--ink:#eef0ff;--ink2:#a9aed6;--line:#262b66;--acc:#f2a33a;--err:#ff9c94;--errbg:#3a1520;--ok:#7be3a6;--okbg:#12352a;--warn:#ffd58a;--warnbg:#3a2c0d;--sh:0 12px 32px -14px rgba(0,0,0,.7)}}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--night)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul{margin:0}ul{padding:0;list-style:none}a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--dawn);outline-offset:2px;border-radius:6px}h1:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--dawn);color:#1a1030;padding:10px 14px;border-radius:8px;z-index:100}.skip:focus{left:12px}
+.side{position:fixed;z-index:60;inset:0 auto 0 0;width:270px;max-width:86vw;background:var(--night);color:#fff;padding:18px 12px 28px;overflow-y:auto;transform:translateX(-100%);transition:transform .2s}
+.side.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(5,6,25,.6);z-index:55;display:none}.scrim.on{display:block}
+.brand{padding:4px 10px 12px;font-weight:800;letter-spacing:.04em;font-size:1.15rem}
+.brand small{display:block;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.6);font-size:.8rem}
+.ng{margin:16px 10px 4px;color:rgba(255,255,255,.55);font-size:.82rem}
+.side a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:rgba(255,255,255,.82);font-weight:600}
+.side a:hover{background:rgba(255,255,255,.08)}.side a[aria-current=page]{background:var(--dawn);color:#1a1030}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;display:flex;align-items:center;gap:10px;min-height:60px;padding:0 16px;background:var(--sf);border-bottom:1px solid var(--line)}
+.who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--ink2);min-width:0}.who b{color:var(--ink)}.who select{width:auto;min-height:36px}
+.bn{background:var(--warnbg);color:var(--warn);padding:10px 16px;font-size:.85rem}
+.main{max-width:1200px;margin:auto;padding:20px 16px 72px}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-weight:800;font-size:clamp(1.6rem,6vw,2.2rem);line-height:1.1;letter-spacing:-.015em}
+h2{font-weight:800;font-size:1.15rem;margin-bottom:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 18px;border-radius:999px;border:2px solid transparent;font-weight:700;cursor:pointer;background:var(--sf2)}
+.btn:disabled{opacity:.6;cursor:wait}.p{background:linear-gradient(180deg,var(--dawn-2),var(--dawn));color:#1a1030}
+.o{background:transparent;border-color:var(--line)}.o:hover{background:var(--sf2)}.d{background:var(--err);color:var(--bg)}
+.dl{color:var(--err)}.sm{min-height:36px;padding:0 14px;font-size:.88rem}
+input,select,textarea{width:100%;min-height:44px;border:2px solid var(--line);border-radius:12px;background:var(--sf);padding:0 12px}
+textarea{padding:10px 12px;min-height:96px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--dawn);outline:none}
+[aria-invalid=true]{border-color:var(--err)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.stat,.pn{background:var(--sf);border-radius:16px;box-shadow:var(--sh);padding:16px}
+.stat{display:block}.stat b{display:block;font-size:1.9rem;line-height:1.1;font-weight:800}.stat span{color:var(--ink2)}
+a.stat:hover{outline:2px solid var(--dawn)}
+.pn{margin-top:16px}.pn li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.pn li:first-of-type{border:0}
+.tb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.tb .q{grid-column:1/-1}
+.tbl{display:none;width:100%;border-collapse:collapse;background:var(--sf);border-radius:16px;overflow:hidden;box-shadow:var(--sh)}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl th{font-size:.85rem;color:var(--ink2);font-weight:600}.tbl tr:last-child td{border:0}
+.cards{display:grid;gap:12px}.cd{background:var(--sf);border-radius:16px;padding:14px;box-shadow:var(--sh);display:grid;gap:8px}
+.cd h3{font-size:1.05rem;line-height:1.3}.kv{display:flex;justify-content:space-between;gap:12px;font-size:.9rem}.kv span{color:var(--ink2)}.kv b{font-weight:600;text-align:right}
+.acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.ch{display:inline-block;padding:2px 10px;border-radius:16px;font-size:.78rem;font-weight:700;background:var(--sf2);text-transform:capitalize}
+.ok{background:var(--okbg);color:var(--ok)}.wn{background:var(--warnbg);color:var(--warn)}.er{background:var(--errbg);color:var(--err)}
+.empty{padding:32px 20px;border:1.5px dashed var(--line);border-radius:16px;text-align:center;display:grid;gap:10px;justify-items:center;color:var(--ink2)}
+.sk{min-height:200px;border-radius:16px;background:linear-gradient(90deg,var(--sf2),var(--sf),var(--sf2));background-size:200% 100%;animation:sk 1.4s linear infinite}@keyframes sk{to{background-position:-200% 0}}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px}.bar{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;font-size:.75rem;color:var(--ink2)}
+.bar i{width:100%;background:linear-gradient(var(--dawn),var(--acc));border-radius:16px 16px 0 0}
+dialog{border:0;border-radius:16px;padding:22px;width:min(520px,94vw);max-height:92vh;background:var(--sf);color:var(--ink);box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(5,6,25,.6)}dialog .acts{margin-top:16px}dialog p{color:var(--ink2)}
+.fl{margin-top:12px}.fl label{display:block;font-weight:600;margin-bottom:4px}.err{color:var(--err);font-size:.85rem;font-weight:600;margin-top:4px}.err:empty{display:none}
+.toast{position:fixed;z-index:120;left:50%;translate:-50% 0;bottom:calc(24px + env(safe-area-inset-bottom,0px));background:var(--night);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;max-width:90vw;opacity:0;pointer-events:none;transition:opacity .2s;text-align:center}.toast.show{opacity:1}
+@media(min-width:700px){.stats{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:760px){.tbl{display:table}.cards{display:none}.tb{display:flex}.tb .q{flex:1;min-width:200px}.tb select{width:auto}}
+@media(min-width:960px){.side{transform:none}.shell{margin-left:270px}.bg,.scrim{display:none!important}.main{padding:28px 32px 72px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== DEVICE FIT (admin) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{overflow-x:clip}
+a,button,summary,label,input,select,textarea{touch-action:manipulation}
+input,select,textarea{font-size:max(16px,1rem)}
+h1,h2,h3,p,li,td,th{overflow-wrap:break-word}
+.sm,.who select{min-height:44px}
+.ch{border-radius:999px}
+.side:not(.open){visibility:hidden}
+.side{padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+dialog{max-height:calc(100dvh - 24px);overflow-y:auto}
+.main{padding-inline:max(16px,env(safe-area-inset-left),env(safe-area-inset-right))}
+.tbl{display:none}
+@media (max-width:480px){.btn{white-space:normal;text-align:center;line-height:1.2;padding-block:10px}.who{font-size:.8rem}.who b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:9ch}.toast{white-space:normal;text-align:center}}
+@media (min-width:760px){.tbl{display:table}}
+@media (min-width:960px){.side:not(.open){visibility:visible}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<aside class="side" id="side" aria-label="Admin"><div class="brand">AJEY CJEY<small>Admin</small></div><nav id="nav" aria-label="Sections"></nav></aside>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+  <div id="bn"></div>
+  <header class="top"><button class="btn o sm bg" id="bg" type="button" aria-expanded="false" aria-controls="side">Menu</button><div class="who" id="who"></div></header>
+  <main class="main" id="main" tabindex="-1"><div class="sk"></div></main>
+</div>
+<dialog id="fm"></dialog><dialog id="cf" role="alertdialog"></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* =====================================================================
+   PART 1 — ACCESS + DATA LAYER (no DOM). Set CFG.apiBase to go live.
+   The UI never decides who is allowed to do what: it renders whatever
+   permissions the backend returns from GET /admin/session, and the
+   backend MUST re-check every request. Hiding a button is not security.
+   Use HttpOnly session cookies (+ CSRF header in H.req) or Bearer tokens.
+     GET  /admin/session -> {user:{name,email}, role, permissions:["videos:*","events:read",…]}
+     GET  /admin/:res?q&status&sort&dir&<filter>  -> {items,total}
+     POST /admin/:res | PATCH /admin/:res/:id {…} | DELETE /admin/:res/:id
+     GET /admin/stats, /admin/analytics, /admin/settings, /admin/security/audit
+     PUT /admin/settings | POST /admin/security/revoke-sessions | POST /admin/logout
+   Permissions are "<resource>:<read|write|publish|delete>" or "<resource>:*" or "*".
+   ===================================================================== */
+const CFG = { apiBase: "", loginUrl: "account.html#/login" };
+const ago = d => new Date(Date.now() - d * 864e5).toISOString();
+const wait = ms => new Promise(r => setTimeout(r, ms));
+class E extends Error { constructor(m, c, f){ super(m); this.code = c; this.fields = f || {}; } }
+const ROLES = { super:"Super Admin", content:"Content Manager", event:"Event Manager", community:"Community Manager" };
+/* demo-only stand-in for what the server returns */
+const DEMO = {
+  super:["*"],
+  content:["dashboard","analytics","videos:*","music:*","devotionals:*","testimonies:*","merch:*","notifications:read"],
+  event:["dashboard","events:*","community:read","notifications:read"],
+  community:["dashboard","community:*","prayers:*","testimonies:*","messages:*","users:read","notifications:*"]
+};
+const H = {
+  async req(m, p, b){
+    let r; try { r = await fetch(CFG.apiBase + p, { method:m, credentials:"include", headers:{ "Content-Type":"application/json", Accept:"application/json" }, body:b ? JSON.stringify(b) : undefined }); }
+    catch (_) { throw new E("Can't reach the server. Check your connection.", "net"); }
+    if (r.status === 401){ location.href = CFG.loginUrl; throw new E("Signed out.", 401); }
+    const d = r.status === 204 ? null : await r.json().catch(() => null);
+    if (!r.ok) throw new E((d && d.message) || (r.status === 403 ? "You don't have permission to do that." : "Something went wrong. Try again."), r.status, d && d.fields);
+    return d;
+  },
+  session:() => H.req("GET", "/admin/session"),
+  list:(k, p) => { const q = { q:p.q, status:p.status, sort:p.sort, dir:p.dir }; if (p.flt) q[R[k].flt[0]] = p.flt; return H.req("GET", `/admin/${k}?` + new URLSearchParams(Object.fromEntries(Object.entries(q).filter(([, v]) => v)))); },
+  save:(k, id, v) => H.req(id ? "PATCH" : "POST", `/admin/${k}${id ? "/" + id : ""}`, v),
+  setStatus:(k, id, status) => H.req("PATCH", `/admin/${k}/${id}`, { status }),
+  remove:(k, id) => H.req("DELETE", `/admin/${k}/${id}`),
+  stats:() => H.req("GET", "/admin/stats"), analytics:() => H.req("GET", "/admin/analytics"),
+  settings:() => H.req("GET", "/admin/settings"), saveSettings:v => H.req("PUT", "/admin/settings", v),
+  audit:() => H.req("GET", "/admin/security/audit"), revokeSessions:() => H.req("POST", "/admin/security/revoke-sessions"), logout:() => H.req("POST", "/admin/logout")
+};
+const M = { /* demo adapter: in-memory sample data, resets on reload */
+  role:"super", s:{ siteName:"AJEY CJEY", contactEmail:"hello@ajeycjey.org", prayerModeration:"review", announcement:"" },
+  d:{
+    users:[{id:"1",name:"Grace Nakato",email:"grace@example.com",role:"Member",status:"active",createdAt:ago(40)},{id:"2",name:"Daniel Kato",email:"daniel@example.com",role:"Content Manager",status:"active",createdAt:ago(90)},{id:"3",name:"Ruth Achieng",email:"ruth@example.com",role:"Member",status:"suspended",createdAt:ago(12)}],
+    videos:[{id:"1",title:"Encountering Jesus in the ordinary",speaker:"Pastor Samuel",category:"Message",views:12400,status:"published",updatedAt:ago(2)},{id:"2",title:"Purpose after the pain",speaker:"Ruth A.",category:"Testimony",views:5600,status:"published",updatedAt:ago(6)},{id:"3",title:"Morning prayer for a new season",speaker:"Pastor Samuel",category:"Devotional",views:0,status:"draft",updatedAt:ago(1)}],
+    music:[{id:"1",title:"Amazing Jesus",artist:"AJEY CJEY Worship",genre:"Worship",plays:9800,status:"published",updatedAt:ago(3)},{id:"2",title:"Holy Ground",artist:"AJEY CJEY Worship",genre:"Worship",plays:7300,status:"published",updatedAt:ago(9)},{id:"3",title:"You Encounter Me",artist:"AJEY CJEY Worship",genre:"Gospel",plays:0,status:"draft",updatedAt:ago(1)}],
+    devotionals:[{id:"1",title:"He meets you where you are",verse:"James 4:8",publishAt:ago(0),status:"published",updatedAt:ago(1)},{id:"2",title:"Rest is obedience",verse:"Matthew 11:28",publishAt:ago(-3),status:"draft",updatedAt:ago(0)}],
+    events:[{id:"1",title:"Encounter Night",startsAt:ago(-9),location:"Venue to be announced",registered:64,status:"published",updatedAt:ago(4)},{id:"2",title:"Youth hangout",startsAt:ago(-12),location:"Kampala",registered:22,status:"draft",updatedAt:ago(2)}],
+    prayers:[{id:"1",text:"Wisdom for a big decision at work.",category:"Guidance",status:"pending",createdAt:ago(0)},{id:"2",text:"Healing for my mother.",category:"Healing",status:"approved",createdAt:ago(3)},{id:"3",text:"Thankful for a new job.",category:"Thanksgiving",status:"pending",createdAt:ago(1)}],
+    testimonies:[{id:"1",name:"Grace M.",place:"Kampala",quote:"I left knowing Jesus had seen me.",status:"published",createdAt:ago(8)},{id:"2",name:"Daniel K.",place:"Entebbe",quote:"These devotionals became my morning routine.",status:"pending",createdAt:ago(1)}],
+    community:[{id:"1",name:"Gospel to the World",members:340,status:"published",updatedAt:ago(5)},{id:"2",name:"Youth fellowship",members:112,status:"draft",updatedAt:ago(7)}],
+    merch:[{id:"1",name:"Amazing Jesus T-shirt",price:45000,stock:30,status:"published",updatedAt:ago(6)},{id:"2",name:"Worship journal",price:25000,stock:0,status:"draft",updatedAt:ago(2)}],
+    messages:[{id:"1",from:"Sarah",subject:"Booking a worship night",message:"Hello, we would love to host you at our church in Jinja next month.",status:"new",createdAt:ago(0)},{id:"2",from:"Peter",subject:"Thank you",message:"The devotionals have blessed my family.",status:"read",createdAt:ago(4)}],
+    notifications:[{id:"1",title:"Encounter Night is 9 days away",audience:"Registered for events",status:"sent",createdAt:ago(1)},{id:"2",title:"New devotional",audience:"All members",status:"draft",createdAt:ago(0)}]
+  },
+  session:async () => ({ user:{ name:"Demo admin", email:"demo@ajeycjey.org" }, role:M.role, permissions:DEMO[M.role] }),
+  async list(k, p){
+    await wait(120); let a = [...M.d[k]]; const q = (p.q || "").toLowerCase();
+    if (q) a = a.filter(x => Object.values(x).some(v => String(v).toLowerCase().includes(q)));
+    if (p.status) a = a.filter(x => x.status === p.status);
+    if (p.flt) a = a.filter(x => x[R[k].flt[0]] === p.flt);
+    const s = p.sort, m = p.dir === "asc" ? 1 : -1; a.sort((x, y) => (x[s] > y[s] ? 1 : x[s] < y[s] ? -1 : 0) * m);
+    return { items:a, total:a.length };
+  },
+  async save(k, id, v){ await wait(150); const now = new Date().toISOString(), a = M.d[k];
+    if (id) Object.assign(a.find(x => x.id === id), v, { updatedAt:now });
+    else a.unshift({ id:Math.random().toString(36).slice(2, 8), status:R[k].st[0], createdAt:now, updatedAt:now, ...v }); },
+  async setStatus(k, id, s){ await wait(100); M.d[k].find(x => x.id === id).status = s; },
+  async remove(k, id){ await wait(100); M.d[k] = M.d[k].filter(x => x.id !== id); },
+  async stats(){ const d = M.d, n = k => d[k].length, c = (k, s) => d[k].filter(x => x.status === s).length;
+    return { users:n("users"), videoViews:d.videos.reduce((t, x) => t + x.views, 0), songPlays:d.music.reduce((t, x) => t + x.plays, 0), devotionals:n("devotionals"), events:n("events"), prayers:n("prayers"), testimonies:n("testimonies"), pending:{ prayers:c("prayers", "pending"), testimonies:c("testimonies", "pending"), messages:c("messages", "new") } }; },
+  analytics:async () => ({ days:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((d, i) => ({ d, views:[820, 940, 760, 1210, 1100, 1560, 1380][i], plays:[540, 610, 480, 700, 820, 1120, 990][i] })) }),
+  settings:async () => ({ ...M.s }), saveSettings:async v => { await wait(150); Object.assign(M.s, v); },
+  audit:async () => [{ who:"Demo admin", what:"Signed in", at:ago(0) }, { who:"Daniel Kato", what:"Published a video", at:ago(1) }, { who:"Demo admin", what:"Changed site settings", at:ago(2) }],
+  revokeSessions:async () => wait(150), logout:async () => {}
+};
+const Api = CFG.apiBase ? H : M;
+
+/* =====================================================================
+   PART 2 — RESOURCE CONFIG. One entry drives the table, cards, form,
+   filters and actions. tog = [onStatus, offStatus, onLabel, offLabel|null, confirm?]
+   fields = [key, label, type, required, options]
+   ===================================================================== */
+const cat = ["Message", "Worship", "Testimony", "Devotional"];
+const PT = ["publish", "Publish", "Unpublish"];
+const R = {
+  videos:{ t:"Videos", one:"video", st:["draft", "published"], tog:["published", "draft", "Publish", "Unpublish"],
+    cols:[["title", "Title"], ["category", "Category"], ["views", "Views", "n"], ["status", "Status", "s"], ["updatedAt", "Updated", "d"]],
+    flt:["category", "category", cat], sort:[["updatedAt", "Recently updated"], ["title", "Title"], ["views", "Views"]],
+    f:[["title", "Title", "text", 1], ["speaker", "Speaker"], ["category", "Category", "select", 1, cat], ["videoUrl", "Video link", "url"], ["description", "Description", "textarea"]] },
+  music:{ t:"Music", one:"song", st:["draft", "published"], tog:["published", "draft", "Publish", "Unpublish"],
+    cols:[["title", "Title"], ["artist", "Artist"], ["genre", "Genre"], ["plays", "Plays", "n"], ["status", "Status", "s"]],
+    flt:["genre", "genre", ["Worship", "Gospel", "Choir", "Instrumental"]], sort:[["updatedAt", "Recently updated"], ["title", "Title"], ["plays", "Plays"]],
+    f:[["title", "Title", "text", 1], ["artist", "Artist", "text", 1], ["genre", "Genre", "select", 1, ["Worship", "Gospel", "Choir", "Instrumental"]], ["audioUrl", "Audio link", "url"]] },
+  devotionals:{ t:"Devotionals", one:"devotional", st:["draft", "published"], tog:["published", "draft", "Publish", "Unpublish"],
+    cols:[["title", "Title"], ["verse", "Verse"], ["publishAt", "Date", "d"], ["status", "Status", "s"]],
+    sort:[["updatedAt", "Recently updated"], ["title", "Title"], ["publishAt", "Date"]],
+    f:[["title", "Title", "text", 1], ["verse", "Bible reference", "text", 1], ["body", "Devotional text", "textarea", 1], ["publishAt", "Publish date", "date"]] },
+  testimonies:{ t:"Testimonies", one:"testimony", st:["pending", "published"], tog:["published", "pending", "Publish", "Unpublish"],
+    cols:[["name", "Name"], ["place", "Place"], ["quote", "Testimony", "t"], ["status", "Status", "s"]],
+    sort:[["createdAt", "Newest"], ["name", "Name"]],
+    f:[["name", "Name", "text", 1], ["place", "Place"], ["quote", "Testimony", "textarea", 1]] },
+  merch:{ t:"Merchandise", one:"product", st:["draft", "published"], tog:["published", "draft", "Publish", "Unpublish"],
+    cols:[["name", "Product"], ["price", "Price", "m"], ["stock", "Stock", "n"], ["status", "Status", "s"]],
+    sort:[["updatedAt", "Recently updated"], ["name", "Name"], ["price", "Price"], ["stock", "Stock"]],
+    f:[["name", "Product name", "text", 1], ["price", "Price (UGX)", "number", 1], ["stock", "In stock", "number", 1], ["description", "Description", "textarea"]] },
+  events:{ t:"Events", one:"event", st:["draft", "published"], tog:["published", "draft", "Publish", "Unpublish"],
+    cols:[["title", "Event"], ["startsAt", "Date", "d"], ["location", "Location"], ["registered", "Registered", "n"], ["status", "Status", "s"]],
+    sort:[["startsAt", "Event date"], ["title", "Title"], ["registered", "Registered"]],
+    f:[["title", "Title", "text", 1], ["startsAt", "Starts", "datetime-local", 1], ["location", "Location", "text", 1], ["capacity", "Capacity", "number"], ["description", "Description", "textarea"]] },
+  prayers:{ t:"Prayer requests", one:"prayer request", noAdd:1, st:["pending", "approved", "answered"], tog:["approved", "pending", "Approve", "Unapprove"],
+    cols:[["text", "Request", "t"], ["category", "Category"], ["status", "Status", "s"], ["createdAt", "Received", "d"]],
+    flt:["category", "category", ["Guidance", "Healing", "Thanksgiving", "Family"]], sort:[["createdAt", "Newest"], ["category", "Category"]],
+    f:[["text", "Request", "textarea", 1], ["category", "Category", "select", 1, ["Guidance", "Healing", "Thanksgiving", "Family"]]] },
+  community:{ t:"Community", one:"group", st:["draft", "published"], tog:["published", "draft", "Publish", "Unpublish"],
+    cols:[["name", "Group"], ["members", "Members", "n"], ["status", "Status", "s"]], sort:[["updatedAt", "Recently updated"], ["name", "Name"], ["members", "Members"]],
+    f:[["name", "Group name", "text", 1], ["joinUrl", "WhatsApp invite link", "url"], ["description", "Description", "textarea"]] },
+  messages:{ t:"Messages", one:"message", noAdd:1, noEdit:1, st:["new", "read", "replied"], tog:["read", "new", "Mark read", "Mark unread"],
+    cols:[["from", "From"], ["subject", "Subject"], ["message", "Message", "t"], ["status", "Status", "s"], ["createdAt", "Received", "d"]], sort:[["createdAt", "Newest"], ["from", "Sender"]], f:[] },
+  notifications:{ t:"Notifications", one:"notification", st:["draft", "sent"], tog:["sent", "draft", "Send now", null, 1],
+    cols:[["title", "Title"], ["audience", "Audience"], ["status", "Status", "s"], ["createdAt", "Created", "d"]], sort:[["createdAt", "Newest"], ["title", "Title"]],
+    f:[["title", "Title", "text", 1], ["body", "Message", "textarea", 1], ["audience", "Send to", "select", 1, ["All members", "Registered for events", "Staff"]]] },
+  users:{ t:"Users", one:"user", st:["active", "suspended"], tog:["active", "suspended", "Reactivate", "Suspend", 1],
+    cols:[["name", "Name"], ["email", "Email"], ["role", "Role"], ["status", "Status", "s"], ["createdAt", "Joined", "d"]],
+    flt:["role", "role", ["Member", "Content Manager", "Event Manager", "Community Manager", "Super Admin"]], sort:[["createdAt", "Newest"], ["name", "Name"]],
+    f:[["name", "Full name", "text", 1], ["email", "Email", "email", 1], ["role", "Role", "select", 1, ["Member", "Content Manager", "Event Manager", "Community Manager", "Super Admin"]]] }
+};
+const SP = { dashboard:"Dashboard", analytics:"Analytics", settings:"Settings", security:"Security" };
+const NAV = [["Overview", ["dashboard", "analytics"]], ["Content", ["videos", "music", "devotionals", "testimonies", "merch"]], ["Engagement", ["events", "prayers", "community", "messages", "notifications"]], ["Administration", ["users", "settings", "security"]]];
+const title = k => SP[k] || R[k].t;
+
+/* =====================================================================
+   PART 3 — UI
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const CH = { published:"ok", active:"ok", sent:"ok", approved:"ok", read:"ok", answered:"ok", draft:"wn", pending:"wn", new:"wn", suspended:"er" };
+const fmt = (v, t) => {
+  if (v == null || v === "") return "—";
+  try {
+    if (t === "n") return (+v).toLocaleString(); if (t === "m") return "UGX " + (+v).toLocaleString();
+    if (t === "d") return new Intl.DateTimeFormat(undefined, { day:"numeric", month:"short", year:"numeric" }).format(new Date(v));
+  } catch (_) {}
+  if (t === "s") return `<span class="ch ${CH[v] || ""}">${esc(v)}</span>`;
+  const s = String(v); return esc(t === "t" && s.length > 70 ? s.slice(0, 70) + "…" : s);
+};
+let SESS = { permissions:[] }, rid = 0, ITEMS = [], toastT;
+const ST = {};
+const can = (k, a = "read") => SESS.permissions.some(p => p === "*" || p === k || p === k + ":*" || p === k + ":" + a);
+const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2600); };
+const main = (html, t) => { $("#main").innerHTML = html; document.title = t + " — AJEY Admin"; scrollTo(0, 0); const h = $("#main h1"); if (h) h.focus({ preventScroll:true }); };
+const errBox = e => `<div class="empty"><p>${esc(e.message || "Couldn't load this. Try again.")}</p><button class="btn p sm" data-a="retry" type="button">Try again</button></div>`;
+
+function ask({ title, text, ok = "Confirm", danger }){
+  return new Promise(res => {
+    const d = $("#cf");
+    d.innerHTML = `<h2>${esc(title)}</h2><p>${esc(text)}</p><div class="acts"><button class="btn o" data-r="0" type="button">Cancel</button><button class="btn ${danger ? "d" : "p"}" data-r="1" type="button">${esc(ok)}</button></div>`;
+    d.onclick = e => { const b = e.target.closest("[data-r]"); if (b){ d.onclose = null; d.close(); res(b.dataset.r === "1"); } };
+    d.onclose = () => res(false); d.showModal(); $('[data-r="0"]', d).focus();
+  });
+}
+
+function buildShell(){
+  $("#nav").innerHTML = NAV.map(([g, ks]) => { const v = ks.filter(k => can(k)); return v.length ? `<p class="ng">${g}</p>` + v.map(k => `<a href="#/${k}">${title(k)}</a>`).join("") : ""; }).join("");
+  const demo = !CFG.apiBase;
+  $("#bn").innerHTML = demo ? `<div class="bn" role="note">Demo mode: sample data and no real sign-in. The role menu only previews the interface. Your backend must enforce permissions on every request.</div>` : "";
+  $("#who").innerHTML = `<span><b>${esc(SESS.user.name)}</b></span>` + (demo ? `<label class="sr" for="rp">Preview role</label><select id="rp">${Object.entries(ROLES).map(([k, v]) => `<option value="${k}"${k === M.role ? " selected" : ""}>${v}</option>`).join("")}</select>` : `<span class="ch">${esc(ROLES[SESS.role] || SESS.role)}</span>`) + `<button class="btn o sm" data-a="logout" type="button">Sign out</button>`;
+}
+const setMenu = o => { $("#side").classList.toggle("open", o); $("#scrim").classList.toggle("on", o); $("#bg").setAttribute("aria-expanded", o); };
+
+/* ----- pages ----- */
+async function dashboard(){
+  main(`<div class="ph"><h1 tabindex="-1">Dashboard</h1></div><div class="stats"><div class="sk"></div></div>`, "Dashboard");
+  const my = ++rid;
+  try {
+    const s = await Api.stats(); if (my !== rid) return;
+    const c = [["Users", s.users, "users"], ["Video views", s.videoViews, "videos"], ["Song plays", s.songPlays, "music"], ["Devotionals", s.devotionals, "devotionals"], ["Events", s.events, "events"], ["Prayer requests", s.prayers, "prayers"], ["Testimonies", s.testimonies, "testimonies"]];
+    const a = [["prayers", "prayer requests waiting for review", s.pending.prayers], ["testimonies", "testimonies waiting for review", s.pending.testimonies], ["messages", "new messages", s.pending.messages]].filter(x => x[2] && can(x[0]));
+    $(".stats").innerHTML = c.map(([l, v, k]) => { const b = `<b>${(+v).toLocaleString()}</b><span>${l}</span>`; return can(k) ? `<a class="stat" href="#/${k}">${b}</a>` : `<div class="stat">${b}</div>`; }).join("");
+    $("#main").insertAdjacentHTML("beforeend", `<section class="pn"><h2>Needs your attention</h2>${a.length ? `<ul>${a.map(([k, l, n]) => `<li><span>${n} ${l}</span><a class="dl" style="color:var(--link,inherit);font-weight:700" href="#/${k}">Review</a></li>`).join("")}</ul>` : `<p class="empty" style="border:0">You're all caught up.</p>`}</section>`);
+  } catch (e){ if (my === rid) $(".stats").innerHTML = errBox(e); }
+}
+async function analytics(){
+  main(`<div class="ph"><h1 tabindex="-1">Analytics</h1></div><div class="sk"></div>`, "Analytics");
+  const my = ++rid;
+  try {
+    const { days } = await Api.analytics(); if (my !== rid) return;
+    const chart = (key, l) => { const mx = Math.max(...days.map(d => d[key]), 1); return `<section class="pn"><h2>${l} this week</h2><div class="bars" role="img" aria-label="${l}: ${days.map(d => d.d + " " + d[key]).join(", ")}">${days.map(d => `<div class="bar"><i style="height:${Math.round(d[key] / mx * 100)}%"></i>${d.d}</div>`).join("")}</div></section>`; };
+    $("#main").lastElementChild.outerHTML = chart("views", "Video views") + chart("plays", "Song plays");
+  } catch (e){ if (my === rid) $("#main").lastElementChild.outerHTML = errBox(e); }
+}
+async function settings(){
+  main(`<div class="ph"><h1 tabindex="-1">Settings</h1></div><div class="sk"></div>`, "Settings");
+  const my = ++rid;
+  try {
+    const s = await Api.settings(); if (my !== rid) return;
+    const w = can("settings", "write");
+    $("#main").lastElementChild.outerHTML = `<form class="pn" id="sf" novalidate><div class="fl"><label for="siteName">Site name</label><input id="siteName" name="siteName" value="${esc(s.siteName)}" required></div><div class="fl"><label for="contactEmail">Contact email</label><input id="contactEmail" name="contactEmail" type="email" value="${esc(s.contactEmail)}" required></div><div class="fl"><label for="prayerModeration">New prayer requests</label><select id="prayerModeration" name="prayerModeration"><option value="review"${s.prayerModeration === "review" ? " selected" : ""}>Review before publishing</option><option value="auto"${s.prayerModeration === "auto" ? " selected" : ""}>Publish immediately</option></select></div><div class="fl"><label for="announcement">Site announcement (optional)</label><input id="announcement" name="announcement" value="${esc(s.announcement)}"></div><p class="err" id="fe" role="alert"></p>${w ? `<div class="acts"><button class="btn p" type="submit">Save settings</button></div>` : `<p>You can view settings but not change them.</p>`}</form>`;
+  } catch (e){ if (my === rid) $("#main").lastElementChild.outerHTML = errBox(e); }
+}
+async function security(){
+  main(`<div class="ph"><h1 tabindex="-1">Security</h1></div><section class="pn"><h2>How sign-in is protected</h2><p>Passwords, two-factor codes, sessions and permissions are handled by your backend. This screen only shows what it reports.</p></section><div class="sk" style="margin-top:16px"></div>`, "Security");
+  const my = ++rid;
+  try {
+    const a = await Api.audit(); if (my !== rid) return;
+    $("#main").lastElementChild.outerHTML = `<section class="pn"><h2>Recent activity</h2><ul>${a.map(x => `<li><span>${esc(x.who)}: ${esc(x.what)}</span><span>${fmt(x.at, "d")}</span></li>`).join("")}</ul></section><section class="pn"><h2>Sessions</h2><p style="margin-bottom:12px">Sign out every device, including this one.</p><button class="btn o dl" data-a="revoke" type="button">Sign out all devices</button></section>`;
+  } catch (e){ if (my === rid) $("#main").lastElementChild.outerHTML = errBox(e); }
+}
+
+/* generic list page: search, filter, sort, table (desktop) + cards (mobile) */
+const btn = (a, l, x, r, cls = "") => `<button class="btn o sm ${cls}" type="button" data-a="${a}" data-id="${esc(x.id)}" aria-label="${esc(l + " " + (x[r.cols[0][0]] || r.one))}">${l}</button>`;
+function rowActions(k, x){
+  const r = R[k], a = [];
+  if (can(k, "write") && !r.noEdit) a.push(btn("edit", "Edit", x, r));
+  if (r.tog && can(k, "publish")){ const l = x.status === r.tog[0] ? r.tog[3] : r.tog[2]; if (l) a.push(btn("tog", l, x, r)); }
+  if (can(k, "delete")) a.push(btn("del", "Delete", x, r, "dl"));
+  return a.join("");
+}
+function listPage(k){
+  const r = R[k], st = ST[k] || (ST[k] = { q:"", status:"", flt:"", sort:r.sort[0][0], dir:"desc" });
+  const opt = (v, l, sel) => `<option value="${esc(v)}"${sel ? " selected" : ""}>${esc(l)}</option>`;
+  main(`<div class="ph"><h1 tabindex="-1">${r.t}</h1>${can(k, "write") && !r.noAdd ? `<button class="btn p" data-a="add" type="button">Add ${r.one}</button>` : ""}</div>
+  <div class="tb"><div class="q"><label class="sr" for="q">Search ${r.t}</label><input id="q" type="search" placeholder="Search ${r.t.toLowerCase()}" value="${esc(st.q)}"></div>
+  <select id="fs" aria-label="Filter by status">${opt("", "All statuses")}${r.st.map(s => opt(s, s[0].toUpperCase() + s.slice(1), st.status === s)).join("")}</select>
+  ${r.flt ? `<select id="ff" aria-label="Filter by ${r.flt[1]}">${opt("", "All " + r.flt[1] + "s")}${r.flt[2].map(s => opt(s, s, st.flt === s)).join("")}</select>` : ""}
+  <select id="so" aria-label="Sort by">${r.sort.map(s => opt(s[0], s[1], st.sort === s[0])).join("")}</select>
+  <button class="btn o" id="sd" type="button" aria-label="Sort direction">${st.dir === "asc" ? "Ascending" : "Descending"}</button></div>
+  <div id="res" aria-live="polite"></div>`, r.t);
+  let t; const go = () => load(k);
+  $("#q").oninput = e => { st.q = e.target.value.trim(); clearTimeout(t); t = setTimeout(go, 250); };
+  $("#fs").onchange = e => { st.status = e.target.value; go(); };
+  if (r.flt) $("#ff").onchange = e => { st.flt = e.target.value; go(); };
+  $("#so").onchange = e => { st.sort = e.target.value; go(); };
+  $("#sd").onclick = e => { st.dir = st.dir === "asc" ? "desc" : "asc"; e.target.textContent = st.dir === "asc" ? "Ascending" : "Descending"; go(); };
+  go();
+}
+async function load(k){
+  const my = ++rid, r = R[k], box = $("#res"); box.innerHTML = '<div class="sk"></div>';
+  try {
+    const { items } = await Api.list(k, ST[k]); if (my !== rid) return; ITEMS = items;
+    if (!items.length){ box.innerHTML = `<div class="empty"><p>No ${r.t.toLowerCase()} match. Try a different search or filter.</p>${can(k, "write") && !r.noAdd ? `<button class="btn p sm" data-a="add" type="button">Add ${r.one}</button>` : ""}</div>`; return; }
+    box.innerHTML = `<table class="tbl"><thead><tr>${r.cols.map(c => `<th scope="col">${c[1]}</th>`).join("")}<th scope="col"><span class="sr">Actions</span></th></tr></thead><tbody>${items.map(x => `<tr>${r.cols.map(c => `<td>${fmt(x[c[0]], c[2])}</td>`).join("")}<td><div class="acts">${rowActions(k, x)}</div></td></tr>`).join("")}</tbody></table>
+    <div class="cards">${items.map(x => `<article class="cd"><h3>${fmt(x[r.cols[0][0]], r.cols[0][2])}</h3>${r.cols.slice(1).map(c => `<div class="kv"><span>${c[1]}</span><b>${fmt(x[c[0]], c[2])}</b></div>`).join("")}<div class="acts">${rowActions(k, x)}</div></article>`).join("")}</div>`;
+  } catch (e){ if (my === rid) box.innerHTML = errBox(e); }
+}
+
+/* add / edit form */
+function fieldHTML([key, label, type = "text", req, opts], v){
+  const id = "f_" + key, a = `id="${id}" name="${key}"${req ? " required" : ""}`;
+  if (type === "date" && v) v = String(v).slice(0, 10); if (type === "datetime-local" && v) v = String(v).slice(0, 16);
+  const c = type === "textarea" ? `<textarea ${a}>${esc(v)}</textarea>` : type === "select" ? `<select ${a}><option value="">Choose…</option>${opts.map(o => `<option${o === v ? " selected" : ""}>${esc(o)}</option>`).join("")}</select>` : `<input ${a} type="${type}" value="${esc(v)}"${type === "number" ? ' min="0"' : ""}>`;
+  return `<div class="fl"><label for="${id}">${label}${req ? "" : " (optional)"}</label>${c}<p class="err" id="e_${key}"></p></div>`;
+}
+function checkForm(r, v){
+  const e = {};
+  for (const [k, l, t, req] of r.f){ const x = (v[k] || "").trim();
+    if (req && !x) e[k] = `Enter ${l.toLowerCase()}.`;
+    else if (x && t === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x)) e[k] = "Enter a valid email address.";
+    else if (x && t === "url" && !/^https?:\/\//i.test(x)) e[k] = "Start the link with https://";
+    else if (x && t === "number" && !(+x >= 0)) e[k] = "Enter a number, 0 or more."; }
+  return e;
+}
+function openForm(k, x){
+  const r = R[k], d = $("#fm");
+  d.innerHTML = `<form id="ef" novalidate><h2>${x ? "Edit" : "Add"} ${r.one}</h2>${r.f.map(f => fieldHTML(f, x && x[f[0]])).join("")}<p class="err" id="fe" role="alert"></p><div class="acts"><button class="btn o" type="button" data-a="close">Cancel</button><button class="btn p" type="submit">${x ? "Save changes" : "Add " + r.one}</button></div></form>`;
+  const f = $("#ef"), show = errs => { $$(".err", f).forEach(p => p.textContent = ""); $$("[aria-invalid]", f).forEach(i => i.removeAttribute("aria-invalid")); let first; for (const key in errs){ const p = $("#e_" + key, f), i = $("#f_" + key, f); if (p) p.textContent = errs[key]; if (i){ i.setAttribute("aria-invalid", "true"); first ||= i; } } if (first) first.focus(); };
+  f.onsubmit = async ev => {
+    ev.preventDefault();
+    const v = Object.fromEntries(new FormData(f)), errs = checkForm(r, v); show(errs); if (Object.keys(errs).length) return;
+    for (const [key, , t] of r.f){ if (v[key] === "") continue; if (t === "number") v[key] = +v[key]; else if (t === "datetime-local") v[key] = new Date(v[key]).toISOString(); else v[key] = v[key].trim(); }
+    const b = $('[type="submit"]', f), l = b.textContent; b.disabled = true; b.textContent = "Saving…";
+    try { await Api.save(k, x && x.id, v); d.close(); toast(x ? "Changes saved" : r.one[0].toUpperCase() + r.one.slice(1) + " added"); load(k); }
+    catch (err){ b.disabled = false; b.textContent = l; if (err.fields && Object.keys(err.fields).length) show(err.fields); else $("#fe", f).textContent = err.message; }
+  };
+  d.showModal(); const first = $("input,select,textarea", f); if (first) first.focus();
+}
+
+/* ----- routing + events ----- */
+function route(){
+  const k = location.hash.replace(/^#\//, "") || "dashboard";
+  if (!SP[k] && !R[k]) return void (location.hash = "#/dashboard");
+  $$("#nav a").forEach(a => a.getAttribute("href") === "#/" + k ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  setMenu(false);
+  if (!can(k)) return main(`<div class="ph"><h1 tabindex="-1">No access</h1></div><div class="empty"><p>Your role doesn't include ${esc(title(k))}. Ask a Super Admin if you need it.</p><a class="btn p sm" href="#/dashboard">Back to dashboard</a></div>`, "No access");
+  ({ dashboard, analytics, settings, security }[k] || (() => listPage(k)))();
+}
+$("#bg").onclick = () => setMenu(!$("#side").classList.contains("open"));
+$("#scrim").onclick = () => setMenu(false);
+addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+addEventListener("hashchange", route);
+document.addEventListener("change", async e => { if (e.target.id !== "rp") return; M.role = e.target.value; SESS = await Api.session(); buildShell(); route(); });
+document.addEventListener("submit", async e => {
+  if (e.target.id !== "sf") return; e.preventDefault();
+  const f = e.target, v = Object.fromEntries(new FormData(f)); if (!v.siteName.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.contactEmail.trim())){ $("#fe", f).textContent = "Enter a site name and a valid contact email."; return; }
+  $("#fe", f).textContent = "";
+  try { await Api.saveSettings(v); toast("Settings saved"); } catch (err){ $("#fe", f).textContent = err.message; }
+});
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  const a = b.dataset.a, k = location.hash.replace(/^#\//, ""), r = R[k], x = ITEMS.find(i => i.id === b.dataset.id);
+  try {
+    if (a === "close") $("#fm").close();
+    else if (a === "retry") route();
+    else if (a === "add") openForm(k);
+    else if (a === "edit" && x) openForm(k, x);
+    else if (a === "tog" && x){
+      const on = x.status === r.tog[0], label = on ? r.tog[3] : r.tog[2];
+      if (r.tog[4] && !await ask({ title:`${label}: ${x[r.cols[0][0]]}?`, text:k === "users" ? "They will not be able to sign in until reactivated." : "This goes out to the audience you chose and can't be recalled.", ok:label, danger:k === "users" })) return;
+      await Api.setStatus(k, x.id, on ? r.tog[1] : r.tog[0]); toast("Updated"); load(k);
+    }
+    else if (a === "del" && x){
+      if (!await ask({ title:`Delete this ${r.one}?`, text:`"${x[r.cols[0][0]]}" will be permanently removed. This can't be undone.`, ok:"Delete", danger:1 })) return;
+      await Api.remove(k, x.id); toast("Deleted"); load(k);
+    }
+    else if (a === "revoke"){
+      if (!await ask({ title:"Sign out all devices?", text:"Everyone signed in with your account, including you, will need to sign in again.", ok:"Sign out all devices", danger:1 })) return;
+      await Api.revokeSessions(); toast("All sessions ended"); if (CFG.apiBase) location.href = CFG.loginUrl;
+    }
+    else if (a === "logout"){ await Api.logout(); if (CFG.apiBase) location.href = CFG.loginUrl; else toast("Demo mode has no real session"); }
+  } catch (err){ toast(err.message || "Something went wrong. Try again."); }
+});
+
+(async () => {
+  try { SESS = await Api.session(); } catch (e){ $("#main").innerHTML = errBox(e); return; }
+  buildShell(); route();
+})();
+</script>
+</body>
+</html>

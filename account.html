@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MY AJEY — AJEY CJEY</title>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0d1033; --night-2:#171b57; --dawn:#f2a33a; --dawn-2:#ffd58a; --ember:#e8683a;
+  --bg:#f5f6fb; --surface:#ffffff; --surface-2:#eceef8; --ink:#0f1233; --ink-2:#4a4f78;
+  --line:#dcdff0; --accent:#a35d0b; --link:#2a30a3; --err:#b3261e; --err-bg:#fdecea; --ok:#1b7a46; --ok-bg:#e6f5ec;
+  --shadow:0 1px 2px rgba(15,18,51,.06),0 10px 30px -12px rgba(15,18,51,.25);
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif; --serif:"Newsreader",Georgia,serif;
+  --nav-h:64px; --wrap:1160px; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a0c26; --surface:#12153f; --surface-2:#1a1e52; --ink:#eef0ff; --ink-2:#a9aed6; --line:#262b66; --accent:#f2a33a; --link:#ffd58a;
+  --err:#ff9c94; --err-bg:#3a1520; --ok:#7be3a6; --ok-bg:#12352a; --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -14px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{
+  --bg:#0a0c26; --surface:#12153f; --surface-2:#1a1e52; --ink:#eef0ff; --ink-2:#a9aed6; --line:#262b66; --accent:#f2a33a; --link:#ffd58a;
+  --err:#ff9c94; --err-bg:#3a1520; --ok:#7be3a6; --ok-bg:#12352a; --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -14px rgba(0,0,0,.7)}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--night);-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 12px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+h1,h2,h3,p,ul{margin:0}ul{padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--dawn);outline-offset:3px;border-radius:6px}
+h1:focus{outline:none}
+a svg,button svg{width:20px;height:20px;flex:none}
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--dawn);color:#1a1030;padding:10px 14px;border-radius:8px;z-index:100}.skip:focus{left:12px}
+.meta{color:var(--ink-2);font-size:.9rem}.center{text-align:center;margin-top:16px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:999px;border:2px solid transparent;font-weight:800;letter-spacing:.05em;font-size:.9rem;cursor:pointer;transition:transform .15s,background .15s;white-space:nowrap}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.6;cursor:wait}
+.btn-primary{background:linear-gradient(180deg,var(--dawn-2),var(--dawn));color:#1a1030;box-shadow:0 10px 30px -10px rgba(242,163,58,.7)}
+.btn-solid{background:var(--night-2);color:#fff}.btn-solid:hover{background:var(--night)}
+.btn-outline{border-color:var(--line);background:transparent;font-weight:600}.btn-outline:hover{background:var(--surface-2)}
+.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.06)}
+.btn-sm{min-height:44px;padding:0 20px;font-size:.9rem}.block{width:100%}
+.ib{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
+.ib:hover{background:var(--surface-2)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;height:var(--nav-h);background:rgba(13,16,51,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);color:#fff}
+.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;letter-spacing:.04em;font-size:1.15rem}
+.brand-mark{width:30px;height:30px}
+#navRight{display:flex;align-items:center;gap:4px}
+.nb{color:#fff}.nb:hover{background:rgba(255,255,255,.12)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ember);display:inline-block}
+.nb .dot{position:absolute;top:9px;right:10px;border:2px solid var(--night)}
+.avatar{width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,hsl(var(--h,240) 60% 32%),hsl(calc(var(--h,240) + 40) 70% 52%))}
+.avatar.lg{width:64px;height:64px;font-size:1.6rem}
+.av-link{display:grid;place-items:center;width:44px;height:44px}
+
+/* auth */
+.auth{min-height:calc(100svh - var(--nav-h));display:grid;place-items:center;padding:36px 20px 56px;color:#fff;background:linear-gradient(180deg,#080a2a 0%,#141852 50%,#4a2a6e 82%,#c1573f 100%)}
+.authbox{width:100%;max-width:440px}
+.authbox h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,9vw,2.8rem);line-height:1.05;letter-spacing:-.02em}
+.authbox .sub{color:rgba(255,255,255,.82);margin:8px 0 22px}
+.cardA{background:var(--surface);color:var(--ink);border-radius:16px;padding:26px 22px;box-shadow:var(--shadow)}
+.foot{margin-top:20px;text-align:center;color:rgba(255,255,255,.85)}.foot a{color:var(--dawn-2);font-weight:600;text-decoration:underline}
+.fld{margin-bottom:16px}.fld label{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
+.in{position:relative}
+input:not([type=checkbox]),textarea{width:100%;min-height:52px;border-radius:12px;border:2px solid var(--line);background:var(--bg);padding:0 16px;font-size:1rem}
+textarea{padding:12px 16px;resize:vertical;min-height:96px}
+input:focus,textarea:focus{border-color:var(--dawn);outline:none}
+input[aria-invalid=true]{border-color:var(--err)}input:disabled{opacity:.65}
+.in input[type=password],.in input[data-pw]{padding-right:76px}
+.eye{position:absolute;right:6px;top:6px;height:40px;padding:0 12px;border:0;background:none;color:var(--link);font-weight:600;cursor:pointer;border-radius:12px}
+.hint{color:var(--ink-2);font-size:.85rem;margin-top:6px}
+.err{color:var(--err);font-size:.88rem;font-weight:600;margin-top:6px}.err:empty{display:none}
+.form-msg.err{background:var(--err-bg);padding:10px 14px;border-radius:12px;margin:0 0 14px}
+.rowlink{text-align:right;margin:-6px 0 16px;font-weight:600;font-size:.92rem}.rowlink a{color:var(--link)}
+.demo,.fine{margin-top:16px;font-size:.85rem;color:var(--ink-2)}.demo a{color:var(--link);font-weight:600;text-decoration:underline}
+.okbox{background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:16px;margin-bottom:16px}.okbox p{color:var(--ink);margin-top:6px}
+
+/* dashboard */
+.dash{padding-block:18px 64px}
+.rail{display:flex;gap:8px;overflow-x:auto;margin:0 -20px 18px;padding:2px 20px;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
+.rail a{flex:none;display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;font-size:.92rem;white-space:nowrap}
+.rail a[aria-current=page]{background:var(--night-2);border-color:var(--night-2);color:#fff}
+.hub .rail{display:none}
+.back{display:inline-flex;align-items:center;gap:4px;color:var(--link);font-weight:600;min-height:44px}
+.hub .back{display:none}
+.pt{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.pt h1,.greet h1{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,7vw,2.5rem);line-height:1.1;letter-spacing:-.015em}
+.greet{margin:6px 0 20px}.greet p{margin-top:6px}
+.cont{display:block;background:linear-gradient(140deg,var(--night),var(--night-2) 60%,#3b2470);color:#fff;border-radius:16px;padding:22px;margin-bottom:22px;box-shadow:var(--shadow)}
+.cont .meta{color:rgba(255,255,255,.7)}.cont h2{font-family:var(--display);font-weight:800;font-size:1.4rem;line-height:1.2;margin:4px 0 14px}
+.cont .btn{margin-top:16px}
+.bar{height:5px;background:var(--line);border-radius:5px;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.cont .bar{background:rgba(255,255,255,.2)}.cont .bar i{background:var(--dawn)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{display:flex;flex-direction:column;gap:2px;background:var(--surface);border-radius:16px;padding:16px;box-shadow:var(--shadow);min-height:118px}
+
+.ti{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);color:var(--accent);margin-bottom:auto}
+.tile b{font-family:var(--display);font-weight:600;font-size:1.02rem;line-height:1.25;margin-top:10px}
+.tile .meta{font-size:.84rem;overflow-wrap:anywhere}
+.rows{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px 8px 12px 12px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow)}
+.lead{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,hsl(var(--h,240) 60% 26%),hsl(calc(var(--h,240) + 40) 70% 46%))}
+.rb{min-width:0}.rb h3{font-family:var(--display);font-weight:600;font-size:1rem;line-height:1.3}
+.rb h3 a:hover{text-decoration:underline}.rb .dot{margin-right:8px;vertical-align:middle}
+.rb .meta{margin-top:2px}.rb .chip{margin-top:6px}
+.chip{display:inline-block;font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);border:1.5px solid transparent}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+button.chip{min-height:40px;padding:0 16px;font-size:.92rem;border-color:var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button.chip[aria-pressed=true]{background:var(--night-2);border-color:var(--night-2);color:#fff}
+.empty{padding:32px 24px;border:1.5px dashed var(--line);border-radius:16px;text-align:center;display:grid;gap:8px;justify-items:center}
+.empty h2{font-family:var(--display);font-weight:800;font-size:1.3rem}.empty p{color:var(--ink-2);max-width:38ch;margin-bottom:8px}
+.panel{background:var(--surface);border-radius:16px;padding:22px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.panel h2{font-family:var(--display);font-weight:800;font-size:1.2rem;margin-bottom:8px}
+.who2{display:flex;align-items:center;gap:16px;margin-bottom:20px}.who2 b{font-family:var(--display);font-size:1.25rem}
+.sw{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.sw:last-child{border:0}.sw>span{display:grid}
+.sw input{appearance:none;-webkit-appearance:none;width:52px;height:32px;min-height:0;border-radius:999px;border:0;padding:0;background:var(--line);position:relative;flex:none;cursor:pointer;transition:background .15s}
+.sw input::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .15s}
+.sw input:checked{background:var(--accent)}.sw input:checked::after{transform:translateX(20px)}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.inline{display:flex;gap:10px;margin-bottom:6px}.inline input{flex:1;min-width:0}
+#plForm{margin-bottom:16px}
+.skel{background:linear-gradient(90deg,var(--surface-2),var(--surface),var(--surface-2));background-size:200% 100%;animation:sk 1.4s linear infinite;border-radius:16px;min-height:240px}
+@keyframes sk{to{background-position:-200% 0}}
+.toast{position:fixed;z-index:120;left:50%;translate:-50% 0;bottom:calc(28px + env(safe-area-inset-bottom,0px));background:var(--night);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.92rem;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);max-width:90vw;opacity:0;pointer-events:none;transition:opacity .2s;text-align:center}
+.toast.show{opacity:1}
+
+@media (min-width:700px){.tiles{grid-template-columns:repeat(3,1fr)}.cardA{padding:32px 30px}}
+@media (min-width:960px){
+  .dash{display:grid;grid-template-columns:250px minmax(0,1fr);gap:36px;padding-top:32px}
+  .rail,.hub .rail{display:flex;flex-direction:column;overflow:visible;margin:0;padding:0;position:sticky;top:calc(var(--nav-h) + 24px);align-self:start;gap:2px}
+  .rail a{border:0;background:none;border-radius:12px;min-height:46px}.rail a:hover{background:var(--surface-2)}
+  .rail a[aria-current=page]{background:var(--night-2)}
+  .back{display:none}.tiles{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============ SHARED PRIMARY NAV (same on every public page) ============ */
+.nav-links{display:none;gap:2px;list-style:none;margin:0 0 0 auto;padding:0}
+.nav-links a{display:block;padding:10px 14px;border-radius:999px;font-weight:600;font-size:.95rem;color:rgba(255,255,255,.78)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a[aria-current="page"]{background:var(--dawn);color:#1a1030}
+.nav-cta{display:none}
+.burger{margin-left:auto;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.burger span{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .2s}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.drawer{position:fixed;left:0;right:0;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));bottom:0;z-index:70;background:#0d1033;padding:16px 20px calc(28px + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;overflow-y:auto;color:#fff}
+.drawer.open{display:flex}
+.drawer a.dl{font-family:var(--display);font-size:1.5rem;font-weight:600;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.1)}
+.drawer a.dl[aria-current="page"]{color:var(--dawn-2)}
+.drawer .btn{margin-top:18px;width:100%}
+#navRight{margin-left:auto}#navRight ~ .burger{margin-left:0}
+@media (min-width:1000px){.nav-links{display:flex}.nav-cta{display:inline-flex}.burger{display:none}.drawer{display:none!important}#navRight{margin-left:0}}
+@media (max-width:420px){.brand span{display:none}}
+
+/* ===== DEVICE FIT: phones, tablets, landscape, notches, large screens ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{overflow-x:clip}
+img,video,iframe,canvas,svg{max-width:100%}
+a,button,summary,label,input,select,textarea{touch-action:manipulation}
+input,select,textarea{font-size:max(16px,1rem)}
+h1,h2,h3,h4,p,li,blockquote,figcaption,td,th{overflow-wrap:break-word}
+.wrap{padding-inline:max(20px,env(safe-area-inset-left),env(safe-area-inset-right))}
+.chip,button.chip,.rail a,.back,.act.sm,.select,.cm-head-row .select,.composer .btn,.sm,.cta-card summary{min-height:44px}
+@media (max-width:480px){
+  .wrap{padding-inline:max(16px,env(safe-area-inset-left),env(safe-area-inset-right))}
+  .btn{white-space:normal;text-align:center;line-height:1.2;padding-block:10px}
+  .toast{max-width:calc(100vw - 32px);text-align:center;white-space:normal}
+}
+@media (max-height:480px) and (orientation:landscape){
+  .hero{min-height:0}.hero-inner{padding:32px 0 48px}
+  .drawer a.dl{font-size:1.15rem;padding:10px 4px}
+}
+@media (min-width:1600px){:root{--wrap:1280px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+<header class="nav"><div class="wrap"><a class="brand" id="brand" href="index.html" aria-label="AJEY CJEY home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="bm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd58a"/><stop offset="1" stop-color="#e8683a"/></linearGradient></defs><circle cx="16" cy="16" r="15" fill="none" stroke="url(#bm)" stroke-width="2"/><path d="M16 6v20M9 12h14" stroke="url(#bm)" stroke-width="3.2" stroke-linecap="round"/></svg><span>AJEY CJEY</span></a><nav aria-label="Primary"><ul class="nav-links"><li><a data-nav="watch" href="watch.html#/watch">Watch</a></li><li><a data-nav="listen" href="watch.html#/listen">Listen</a></li><li><a data-nav="word" href="word.html#/word">Word</a></li><li><a data-nav="prayer" href="word.html#/prayer">Prayer</a></li><li><a data-nav="community" href="word.html#/community">Community</a></li></ul></nav><div id="navRight"></div><button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button></div></header><div class="drawer" id="drawer" aria-hidden="true"><a class="dl" data-nav="watch" href="watch.html#/watch">Watch</a><a class="dl" data-nav="listen" href="watch.html#/listen">Listen</a><a class="dl" data-nav="word" href="word.html#/word">Word</a><a class="dl" data-nav="prayer" href="word.html#/prayer">Prayer</a><a class="dl" data-nav="community" href="word.html#/community">Community</a><a class="btn btn-primary" data-nav="me" href="account.html">MY AJEY</a></div>
+<main id="app" tabindex="-1"><div class="wrap dash"><div class="skel" style="grid-column:1/-1"></div></div></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><p class="wrap">MY AJEY needs JavaScript to run.</p></noscript>
+
+<script>
+/* ===== PART 1 of 2: AUTH + DATA LAYER (no DOM code). Connect your API by setting apiBase below. ===== */
+window.AJEY_CONFIG = window.AJEY_CONFIG || { apiBase: "" };   /* e.g. "https://api.ajeycjey.org/v1" ; "" = demo mode */
+</script>
+<script>
+/* =====================================================================
+   AJEY CJEY — auth + account data layer. No DOM code lives here.
+   Demo mode (apiBase "") keeps accounts in this browser only.
+   Go live: set window.AJEY_CONFIG = { apiBase:"https://api.ajeycjey.org/v1" }
+   before loading this file. Endpoints the HTTP adapter calls (JSON, Bearer token):
+     POST /auth/login {email,password}          -> {token,user}
+     POST /auth/register {name,email,password}  -> {token,user}
+     POST /auth/forgot {email}                  -> 204 (always, never reveal if email exists)
+     POST /auth/reset {token,password}          -> 204
+     POST /auth/logout                          -> 204
+     GET/PATCH /me                              -> user {id,name,email,phone,city,bio,createdAt,settings}
+     GET /me/:section   POST /me/:section   PATCH /me/:section/:id   PATCH /me/:section {…}
+     DELETE /me/:section/:id   DELETE /me/:section
+   sections: liked-videos liked-songs saved playlists watch-history listening-history
+             prayers events notifications
+   Errors: non-2xx with {message, fields?:{email:"…"}}. 401 = signed out.
+   ===================================================================== */
+(() => {
+const CFG = Object.assign({ apiBase: "", prefix: "ajey:" }, window.AJEY_CONFIG || {});
+const K = { token: CFG.prefix + "token", users: CFG.prefix + "mock-users", data: CFG.prefix + "mock-data", resets: CFG.prefix + "mock-resets" };
+const ls = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (_) { return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} },
+  del(k){ try { localStorage.removeItem(k); } catch (_) {} }
+};
+class ApiError extends Error { constructor(message, code, fields){ super(message); this.code = code; this.fields = fields || {}; } }
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const rid = () => Math.random().toString(36).slice(2, 10);
+const sha = async s => {
+  if (window.crypto && crypto.subtle) return [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, "0")).join("");
+  return btoa(unescape(encodeURIComponent(s)));
+};
+
+/* ---------- validation rules (messages are user-facing) ---------- */
+const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const V = {
+  email: e => !e ? "Enter your email address." : !re.test(e) ? "Enter a valid email address, like name@example.com." : "",
+  password: p => !p ? "Enter a password." : p.length < 8 ? "Use at least 8 characters." : !/[A-Za-z]/.test(p) || !/\d/.test(p) ? "Include at least one letter and one number." : "",
+  name: n => !n || n.trim().length < 2 ? "Enter your name." : "",
+  pack(o){ const e = {}; for (const k in o) if (o[k]) e[k] = o[k]; return e; },
+  login: v => V.pack({ email: V.email(v.email), password: v.password ? "" : "Enter your password." }),
+  register: v => V.pack({ name: V.name(v.name), email: V.email(v.email), password: V.password(v.password) }),
+  forgot: v => V.pack({ email: V.email(v.email) }),
+  reset: v => V.pack({ password: V.password(v.password), confirm: v.password === v.confirm ? "" : "Passwords don't match." }),
+  profile: v => V.pack({ name: V.name(v.name) })
+};
+
+/* ---------- HTTP adapter (real backend) ---------- */
+const Http = {
+  async req(method, path, body){
+    const t = ls.get(K.token, null);
+    let res;
+    try {
+      res = await fetch(CFG.apiBase + path, { method, headers: Object.assign({ "Content-Type": "application/json", Accept: "application/json" }, t ? { Authorization: "Bearer " + t } : {}), body: body ? JSON.stringify(body) : undefined });
+    } catch (_) { throw new ApiError("Can't reach the server. Check your connection and try again.", "network"); }
+    const data = res.status === 204 ? null : await res.json().catch(() => null);
+    if (!res.ok) throw new ApiError((data && data.message) || "Something went wrong. Try again.", res.status === 401 ? "unauthorized" : "http", data && data.fields);
+    return data;
+  },
+  login: b => Http.req("POST", "/auth/login", b),
+  register: b => Http.req("POST", "/auth/register", b),
+  forgot: b => Http.req("POST", "/auth/forgot", b),
+  reset: b => Http.req("POST", "/auth/reset", b),
+  logout: () => Http.req("POST", "/auth/logout"),
+  me: () => Http.req("GET", "/me"),
+  updateMe: p => Http.req("PATCH", "/me", p),
+  list: s => Http.req("GET", "/me/" + s).then(r => r.items || r),
+  add: (s, item) => Http.req("POST", "/me/" + s, item),
+  patch: (s, id, p) => Http.req("PATCH", `/me/${s}/${id}`, p),
+  patchAll: (s, p) => Http.req("PATCH", "/me/" + s, p),
+  remove: (s, id) => Http.req("DELETE", `/me/${s}/${id}`),
+  clear: s => Http.req("DELETE", "/me/" + s)
+};
+
+/* ---------- Mock adapter (demo mode, this browser only) ---------- */
+const ago = d => new Date(Date.now() - d * 864e5).toISOString();
+const seed = () => ({
+  "liked-videos": [
+    { id: "v1", title: "Encountering Jesus in the ordinary", speaker: "Pastor Samuel", duration: 2520, hue: 238, url: "watch.html#/watch/video/v1" },
+    { id: "v3", title: "Purpose after the pain", speaker: "Ruth A.", duration: 1080, hue: 200, url: "watch.html#/watch" }],
+  "liked-songs": [
+    { id: "t1", title: "Amazing Jesus", artist: "AJEY CJEY Worship", duration: 312, hue: 262, url: "watch.html#/listen" },
+    { id: "t2", title: "Holy Ground", artist: "AJEY CJEY Worship", duration: 363, hue: 275, url: "watch.html#/listen" },
+    { id: "t3", title: "You Encounter Me", artist: "AJEY CJEY Worship", duration: 287, hue: 300, url: "watch.html#/listen" }],
+  saved: [
+    { id: "s1", kind: "Devotional", title: "He meets you where you are", meta: "James 4:8", hue: 30, url: "word.html#/word" },
+    { id: "s2", kind: "Video", title: "You were made for more", meta: "31 min", hue: 238, url: "watch.html#/watch" },
+    { id: "s3", kind: "Playlist", title: "Morning worship", meta: "12 songs", hue: 262, url: "watch.html#/listen" }],
+  playlists: [
+    { id: "p1", title: "Morning worship", count: 12, hue: 262, url: "watch.html#/listen" },
+    { id: "p2", title: "Prayer time", count: 8, hue: 200, url: "watch.html#/listen" }],
+  "watch-history": [
+    { id: "h1", title: "Encountering Jesus in the ordinary", speaker: "Pastor Samuel", progress: .62, at: ago(0), hue: 238, url: "watch.html#/watch/video/v1" },
+    { id: "h2", title: "You were made for more", speaker: "Pastor Samuel", progress: 1, at: ago(2), hue: 275, url: "watch.html#/watch" }],
+  "listening-history": [
+    { id: "l1", title: "Holy Ground", artist: "AJEY CJEY Worship", at: ago(0), hue: 275, url: "watch.html#/listen" },
+    { id: "l2", title: "Amazing Jesus", artist: "AJEY CJEY Worship", at: ago(1), hue: 262, url: "watch.html#/listen" }],
+  prayers: [
+    { id: "r1", text: "Wisdom for a big decision at work.", category: "Guidance", status: "active", prayed: 14, at: ago(3) },
+    { id: "r2", text: "Healing for my mother.", category: "Healing", status: "answered", prayed: 31, at: ago(20) }],
+  events: [{ id: "e2", title: "Encounter Night", startsAt: ago(-9), location: "Venue to be announced", ref: "AJ-7K2Q", url: "word.html#/community" }],
+  notifications: [
+    { id: "n1", title: "Encounter Night is 9 days away", text: "Your seat is reserved.", at: ago(0), read: false },
+    { id: "n2", title: "New devotional", text: "He meets you where you are", at: ago(1), read: false },
+    { id: "n3", title: "A prayer was answered", text: "A request you prayed for was marked answered.", at: ago(6), read: true }]
+});
+const Mock = {
+  users: () => ls.get(K.users, {}),
+  who(){ const t = ls.get(K.token, ""); const u = Mock.users()[t.replace("mock:", "")]; if (!u) throw new ApiError("Please sign in again.", "unauthorized"); return u; },
+  pub: u => { const { hash, ...rest } = u; return rest; },
+  data(){ const u = Mock.who(), all = ls.get(K.data, {}); return [all, all[u.email] || (all[u.email] = seed())]; },
+  async login({ email, password }){
+    await wait(450);
+    const u = Mock.users()[email.toLowerCase()];
+    if (!u || u.hash !== await sha(password)) throw new ApiError("Email or password is incorrect.", "invalid");
+    return { token: "mock:" + u.email, user: Mock.pub(u) };
+  },
+  async register({ name, email, password }){
+    await wait(500);
+    const users = Mock.users(), key = email.toLowerCase();
+    if (users[key]) throw new ApiError("", "exists", { email: "An account with this email already exists. Sign in instead." });
+    const u = { id: rid(), name: name.trim(), email: key, hash: await sha(password), phone: "", city: "", bio: "", createdAt: new Date().toISOString(), settings: { emailUpdates: true, eventReminders: true, prayerUpdates: true, theme: "auto" } };
+    users[key] = u; ls.set(K.users, users);
+    return { token: "mock:" + key, user: Mock.pub(u) };
+  },
+  async forgot({ email }){
+    await wait(450);
+    if (!Mock.users()[email.toLowerCase()]) return null;
+    const token = rid() + rid(), r = ls.get(K.resets, {});
+    r[token] = { email: email.toLowerCase(), exp: Date.now() + 36e5 }; ls.set(K.resets, r);
+    return { demoToken: token };   /* a real API sends this by email and returns nothing */
+  },
+  async reset({ token, password }){
+    await wait(450);
+    const r = ls.get(K.resets, {}), hit = r[token], users = Mock.users();
+    if (!hit || hit.exp < Date.now() || !users[hit.email]) throw new ApiError("This reset link has expired or was already used. Request a new one.", "invalid_token");
+    users[hit.email].hash = await sha(password); ls.set(K.users, users);
+    delete r[token]; ls.set(K.resets, r);
+  },
+  async logout(){},
+  async me(){ return Mock.pub(Mock.who()); },
+  async updateMe(p){
+    await wait(250);
+    const u = Mock.who(), users = Mock.users();
+    delete p.email; delete p.id; delete p.hash;
+    Object.assign(users[u.email], p); ls.set(K.users, users);
+    return Mock.pub(users[u.email]);
+  },
+  async list(s){ await wait(200); return Mock.data()[1][s] || []; },
+  async add(s, item){ const [all, d] = Mock.data(); const it = Object.assign({ id: rid(), at: new Date().toISOString() }, item); (d[s] ||= []).unshift(it); ls.set(K.data, all); return it; },
+  async patch(s, id, p){ const [all, d] = Mock.data(); const it = (d[s] || []).find(x => x.id === id); if (it) Object.assign(it, p); ls.set(K.data, all); return it; },
+  async patchAll(s, p){ const [all, d] = Mock.data(); (d[s] || []).forEach(x => Object.assign(x, p)); ls.set(K.data, all); },
+  async remove(s, id){ const [all, d] = Mock.data(); d[s] = (d[s] || []).filter(x => x.id !== id); ls.set(K.data, all); },
+  async clear(s){ const [all, d] = Mock.data(); d[s] = []; ls.set(K.data, all); }
+};
+
+/* ---------- public API (what the UI talks to) ---------- */
+const adapter = CFG.apiBase ? Http : Mock;
+const subs = new Set();
+let user = null;
+const emit = () => subs.forEach(f => f(user));
+const Auth = {
+  isDemo: !CFG.apiBase,
+  get user(){ return user; },
+  onChange(f){ subs.add(f); return () => subs.delete(f); },
+  async init(){
+    if (!ls.get(K.token, null)) return null;
+    try { user = await adapter.me(); } catch (e) { if (e.code === "unauthorized" || !CFG.apiBase) { ls.del(K.token); user = null; } }
+    emit(); return user;
+  },
+  async login(c){ const r = await adapter.login({ email: c.email.trim(), password: c.password }); ls.set(K.token, r.token); user = r.user; emit(); return user; },
+  async register(c){ const r = await adapter.register({ name: c.name.trim(), email: c.email.trim(), password: c.password }); ls.set(K.token, r.token); user = r.user; emit(); return user; },
+  forgot: email => adapter.forgot({ email: email.trim() }),
+  reset: (token, password) => adapter.reset({ token, password }),
+  async logout(){ try { await adapter.logout(); } catch (_) {} ls.del(K.token); user = null; emit(); },
+  async updateProfile(p){ user = await adapter.updateMe(p); emit(); return user; }
+};
+const Account = {
+  list: s => adapter.list(s), add: (s, i) => adapter.add(s, i), patch: (s, id, p) => adapter.patch(s, id, p),
+  patchAll: (s, p) => adapter.patchAll(s, p), remove: (s, id) => adapter.remove(s, id), clear: s => adapter.clear(s)
+};
+window.AJEY_AUTH = { Auth, Account, Validate: V, ApiError, config: CFG };
+})();
+
+</script>
+<script>
+/* ===== PART 2 of 2: PRESENTATION. Presentation layer only. All sign-in and data calls go through window.AJEY_AUTH (Part 1 above). */
+const { Auth, Account, Validate, ApiError } = window.AJEY_AUTH;
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const safeUrl = u => /^(https?:\/\/|\/|#|mailto:|[\w.-]+\.html)/i.test(u || "") ? esc(u) : "#";
+const fmtDate = (iso, o) => { try { return new Intl.DateTimeFormat(undefined, o).format(new Date(iso)); } catch { return ""; } };
+const fmtAgo = iso => { const d = (new Date(iso) - Date.now()) / 864e5, a = Math.abs(d), r = new Intl.RelativeTimeFormat(undefined, { numeric:"auto" }); if (a < 1) return "today"; if (a < 30) return r.format(Math.round(d), "day"); if (a < 365) return r.format(Math.round(d / 30), "month"); return r.format(Math.round(d / 365), "year"); };
+const fmtTime = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+const hueOf = s => { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+const dot = (...a) => a.filter(Boolean).map(esc).join(" • ");
+const greeting = () => { const h = new Date().getHours(); return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening"; };
+
+const P = {
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
+  heart:'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+  note:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  bookmark:'<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',
+  queue:'<path d="M3 6h13M3 12h13M3 18h8"/><path fill="currentColor" stroke="none" d="M17 14v7l5-3.5z"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  headphones:'<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="15" width="4" height="6" rx="1.5"/><rect x="17" y="15" width="4" height="6" rx="1.5"/>',
+  flame:'<path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-5 .5 1.5 1.5 2 2 2 0-3-1-5 1-8z"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>',
+  bell:'<path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16zM10 21h4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',
+  film:'<rect x="3" y="4" width="18" height="16" rx="3"/><path fill="currentColor" stroke="none" d="M10 9v6l5-3z"/>',
+  home:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>',
+  close:'<path d="M6 6l12 12M18 6L6 18"/>', back:'<path d="M15 18l-6-6 6-6"/>'
+};
+const I = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n] || ""}</svg>`;
+
+/* ---------- reusable components (data in, HTML out) ---------- */
+const Btn = ({ label, kind = "primary", type = "button", act = "", block = false }) => `<button class="btn btn-${kind}${block ? " block" : ""}" type="${type}"${act ? ` data-act="${act}"` : ""}>${label}</button>`;
+const Field = ({ id, label, type = "text", value = "", auto = "", hint = "", req = true, extra = "" }) =>
+  `<div class="fld"><label for="${id}">${label}</label><div class="in"><input id="${id}" name="${id}" type="${type}" value="${esc(value)}"${auto ? ` autocomplete="${auto}"` : ""}${req ? " required" : ""}${hint ? ` aria-describedby="${id}-h"` : ""} ${extra}>${type === "password" ? `<button class="eye" type="button" data-act="peek" aria-pressed="false">Show</button>` : ""}</div>${hint ? `<p class="hint" id="${id}-h">${hint}</p>` : ""}<p class="err" id="${id}-e" role="alert"></p></div>`;
+const Avatar = (name, size = "") => `<span class="avatar ${size}" style="--h:${hueOf(name)}">${esc((name || "?").trim().charAt(0).toUpperCase())}</span>`;
+const Shell = (title, sub, body, foot) => `<section class="auth"><div class="authbox"><h1 tabindex="-1">${title}</h1><p class="sub">${sub}</p><div class="cardA">${body}</div><p class="foot">${foot}</p></div></section>`;
+const PageHead = ({ title, sub = "", action = "" }) => `<a class="back" href="#/me">${I("back")}MY AJEY</a><div class="pt"><div><h1 tabindex="-1">${esc(title)}</h1>${sub ? `<p class="meta">${esc(sub)}</p>` : ""}</div>${action}</div>`;
+const Empty = ({ title, text, cta, href }) => `<div class="empty"><h2>${esc(title)}</h2><p>${esc(text)}</p>${cta ? `<a class="btn btn-primary btn-sm" href="${safeUrl(href)}">${esc(cta)}</a>` : ""}</div>`;
+const Row = ({ hue = 240, icon = "note", title, sub = "", href = "", progress = null, chip = "", unread = false, id, remove = "" }) =>
+  `<li class="row"><span class="lead" style="--h:${hue}">${I(icon)}</span><div class="rb"><h3>${unread ? '<span class="dot" role="img" aria-label="Unread"></span>' : ""}${href ? `<a href="${safeUrl(href)}">${esc(title)}</a>` : esc(title)}</h3><p class="meta">${sub}</p>${chip}${progress != null ? `<div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress * 100)}"><i style="width:${Math.round(progress * 100)}%"></i></div>` : ""}</div>${remove ? `<button class="ib" type="button" data-act="remove" data-id="${esc(id)}" aria-label="${esc(remove)}: ${esc(title)}">${I("close")}</button>` : "<span></span>"}</li>`;
+const Tile = (s, sub) => `<a class="tile" href="#/me/${s.key}"><span class="ti">${I(s.icon)}</span><b>${esc(s.title)}</b><span class="meta">${esc(sub)}</span></a>`;
+const Rail = key => `<nav class="rail" aria-label="MY AJEY sections">${[{ key:"", title:"Overview", icon:"home" }, ...SECTIONS].map(s => `<a href="#/me${s.key ? "/" + s.key : ""}"${s.key === key ? ' aria-current="page"' : ""}>${I(s.icon)}${esc(s.title)}</a>`).join("")}</nav>`;
+
+let toastT;
+const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2400); };
+const applyTheme = v => { if (!v || v === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.dataset.theme = v; };
+
+/* ---------- dashboard sections: one config drives list, rows, empty state ---------- */
+const clearBtn = () => Btn({ label: "Clear all", kind: "outline", act: "clear" });
+const SECTIONS = [
+  { key:"profile", title:"Profile", icon:"user" },
+  { key:"liked-videos", title:"Liked videos", icon:"heart", remove:"Remove like",
+    empty:{ title:"No liked videos yet", text:"Tap the heart on a video and it will appear here.", cta:"Browse videos", href:"watch.html#/watch" },
+    row:i => ({ icon:"film", title:i.title, href:i.url, sub:dot(i.speaker, fmtTime(i.duration)) }) },
+  { key:"liked-songs", title:"Liked songs", icon:"note", remove:"Remove like",
+    empty:{ title:"No liked songs yet", text:"Tap the heart on a song and it will appear here.", cta:"Find songs", href:"watch.html#/listen" },
+    row:i => ({ icon:"note", title:i.title, href:i.url, sub:dot(i.artist, fmtTime(i.duration)) }) },
+  { key:"saved", title:"Saved content", icon:"bookmark", remove:"Remove from saved",
+    empty:{ title:"Nothing saved yet", text:"Save devotionals, videos and playlists to come back to them later.", cta:"Read a devotional", href:"word.html#/word" },
+    row:i => ({ icon:"bookmark", title:i.title, href:i.url, sub:dot(i.kind, i.meta) }) },
+  { key:"playlists", title:"Playlists", icon:"queue", remove:"Delete playlist",
+    top:`<form id="plForm" novalidate><div class="inline"><label class="sr" for="title">Playlist name</label><input id="title" name="title" maxlength="60" autocomplete="off" placeholder="Name a new playlist">${Btn({ label:"Create", kind:"solid", type:"submit" }).replace("btn-solid", "btn-solid btn-sm")}</div><p class="err" id="title-e" role="alert"></p><p class="form-msg err" role="alert"></p></form>`,
+    empty:{ title:"No playlists yet", text:"Name one above, then add songs from the Listen page." },
+    row:i => ({ icon:"queue", title:i.title, href:i.url || "watch.html#/listen", sub:esc(`${i.count || 0} ${i.count === 1 ? "song" : "songs"}`) }) },
+  { key:"watch-history", title:"Watch history", icon:"eye", remove:"Remove from history", action:clearBtn,
+    empty:{ title:"Nothing watched yet", text:"Videos you watch are listed here so you can pick them up again.", cta:"Start watching", href:"watch.html#/watch" },
+    row:i => ({ icon:"film", title:i.title, href:i.url, progress:i.progress, sub:dot(i.speaker, fmtAgo(i.at), i.progress >= 1 ? "Finished" : Math.round(i.progress * 100) + "% watched") }) },
+  { key:"listening-history", title:"Listening history", icon:"headphones", remove:"Remove from history", action:clearBtn,
+    empty:{ title:"Nothing played yet", text:"Songs you play are listed here.", cta:"Start listening", href:"watch.html#/listen" },
+    row:i => ({ icon:"note", title:i.title, href:i.url, sub:dot(i.artist, fmtAgo(i.at)) }) },
+  { key:"prayers", title:"Prayer requests", icon:"flame", remove:"Withdraw request",
+    action:() => `<a class="btn btn-primary btn-sm" href="word.html#/prayer/request">New request</a>`,
+    empty:{ title:"No prayer requests", text:"Share what is on your heart and the community will pray with you.", cta:"Submit a request", href:"word.html#/prayer/request" },
+    row:i => ({ icon:"flame", title:i.text, sub:dot(i.category, fmtAgo(i.at), `${i.prayed} ${i.prayed === 1 ? "person" : "people"} prayed`), chip:i.status === "answered" ? '<span class="chip ok">Answered</span>' : '<span class="chip">Still praying</span>' }) },
+  { key:"events", title:"Registered events", icon:"calendar", remove:"Cancel registration",
+    empty:{ title:"No events registered", text:"Reserve a seat at an upcoming gathering.", cta:"See events", href:"word.html#/community" },
+    row:i => ({ icon:"calendar", title:i.title, href:i.url, sub:dot(fmtDate(i.startsAt, { weekday:"short", day:"numeric", month:"short", hour:"numeric", minute:"2-digit" }), i.location), chip:i.ref ? `<span class="chip">Ref ${esc(i.ref)}</span>` : "" }) },
+  { key:"notifications", title:"Notifications", icon:"bell", remove:"Dismiss",
+    action:items => items.some(n => !n.read) ? Btn({ label:"Mark all read", kind:"outline", act:"readall" }) : "",
+    empty:{ title:"You're all caught up", text:"Reminders, prayer updates and new content will show up here." },
+    row:i => ({ icon:"bell", title:i.title, sub:dot(i.text, fmtAgo(i.at)), unread:!i.read }) },
+  { key:"settings", title:"Settings", icon:"gear" }
+];
+
+/* ---------- state + data cache ---------- */
+let rid = 0, cur = "", next = "", resetToken = "";
+const Cache = {};
+const load = async k => Cache[k] || (Cache[k] = await Account.list(k));
+const set = (html, title) => { $("#app").innerHTML = html; document.title = title + " — AJEY CJEY"; scrollTo(0, 0); const h = $("#app h1"); if (h) h.focus({ preventScroll:true }); };
+const go = (path, replace) => { if (replace) { history.replaceState(null, "", "#" + path); route(); } else location.hash = path; };
+
+function renderNav(){
+  const u = Auth.user, un = (Cache.notifications || []).some(n => !n.read);
+  $("#navRight").innerHTML = u
+    ? `<a class="ib nb" href="#/me/notifications" aria-label="Notifications${un ? " (unread)" : ""}">${I("bell")}${un ? '<span class="dot"></span>' : ""}</a><a class="av-link" href="#/me/profile" aria-label="Your profile">${Avatar(u.name)}</a>`
+    : ``;
+}
+
+/* ---------- auth views ---------- */
+const demo = () => Auth.isDemo ? `<p class="demo">Demo mode: accounts are saved in this browser only.</p>` : "";
+const msg = `<p class="form-msg err" role="alert"></p>`;
+const VIEWS = {
+  login: () => set(Shell("Welcome back", "Sign in to your MY AJEY account.",
+    `<form id="loginForm" novalidate>${Field({ id:"email", label:"Email", type:"email", auto:"email", extra:'inputmode="email"' })}${Field({ id:"password", label:"Password", type:"password", auto:"current-password" })}<p class="rowlink"><a href="#/forgot">Forgot password?</a></p>${msg}${Btn({ label:"Sign in", type:"submit", block:true })}</form>${demo()}`,
+    `New to AJEY CJEY? <a href="#/register">Create an account</a>`), "Sign in"),
+  register: () => set(Shell("Create your account", "Keep your favourite worship, videos and prayers in one place.",
+    `<form id="registerForm" novalidate>${Field({ id:"name", label:"Full name", auto:"name" })}${Field({ id:"email", label:"Email", type:"email", auto:"email", extra:'inputmode="email"' })}${Field({ id:"password", label:"Password", type:"password", auto:"new-password", hint:"At least 8 characters, with a letter and a number." })}${msg}${Btn({ label:"Create account", type:"submit", block:true })}<p class="fine">By creating an account you agree to the AJEY CJEY Terms and Privacy Policy.</p></form>${demo()}`,
+    `Already have an account? <a href="#/login">Sign in</a>`), "Create account"),
+  forgot: () => set(Shell("Forgot your password?", "Enter your email and we'll send you a link to reset it.",
+    `<div id="forgotBody"><form id="forgotForm" novalidate>${Field({ id:"email", label:"Email", type:"email", auto:"email", extra:'inputmode="email"' })}${msg}${Btn({ label:"Send reset link", type:"submit", block:true })}</form></div>${demo()}`,
+    `Remembered it? <a href="#/login">Back to sign in</a>`), "Forgot password"),
+  reset: q => {
+    resetToken = q.get("token") || "";
+    if (!resetToken) return set(Shell("This link isn't complete", "Open the reset link from your email, or ask for a new one.", `<a class="btn btn-primary block" href="#/forgot">Request a new link</a>`, `<a href="#/login">Back to sign in</a>`), "Reset password");
+    set(Shell("Choose a new password", "Pick something you haven't used here before.",
+      `<form id="resetForm" novalidate>${Field({ id:"password", label:"New password", type:"password", auto:"new-password", hint:"At least 8 characters, with a letter and a number." })}${Field({ id:"confirm", label:"Confirm new password", type:"password", auto:"new-password" })}${msg}${Btn({ label:"Update password", type:"submit", block:true })}</form>`,
+      `<a href="#/login">Back to sign in</a>`), "Reset password");
+  }
+};
+
+/* ---------- forms: validation + submit wiring, no auth logic here ---------- */
+const FORMS = {
+  loginForm:{ check:Validate.login, busy:"Signing in…", submit:async v => { await Auth.login(v); const n = next; next = ""; go(n || "/me", true); } },
+  registerForm:{ check:Validate.register, busy:"Creating account…", submit:async v => { await Auth.register(v); go("/me", true); toast("Welcome to AJEY CJEY"); } },
+  forgotForm:{ check:Validate.forgot, busy:"Sending…", submit:async v => {
+    const r = await Auth.forgot(v.email);
+    $("#forgotBody").innerHTML = `<div class="okbox" role="status"><b>Check your email</b><p>If an account exists for ${esc(v.email)}, we've sent a link to reset your password. It expires in one hour.</p></div>${r && r.demoToken ? `<p class="demo">Demo mode: <a href="#/reset?token=${encodeURIComponent(r.demoToken)}">open the reset link</a></p>` : ""}<p class="center"><a class="btn btn-outline block" href="#/login">Back to sign in</a></p>`;
+  } },
+  resetForm:{ check:Validate.reset, busy:"Updating…", submit:async v => { await Auth.reset(resetToken, v.password); go("/login", true); toast("Password updated. Sign in with your new password."); } },
+  profileForm:{ check:Validate.profile, busy:"Saving…", submit:async v => { await Auth.updateProfile({ name:v.name.trim(), phone:(v.phone || "").trim(), city:(v.city || "").trim(), bio:(v.bio || "").trim() }); renderNav(); toast("Profile saved"); } },
+  plForm:{ check:v => v.title.trim() ? {} : { title:"Name your playlist." }, busy:"Creating…", submit:async v => { await Account.add("playlists", { title:v.title.trim(), count:0, hue:hueOf(v.title) }); await refresh(); toast("Playlist created"); } }
+};
+function showErrors(f, errs){
+  $$(".err", f).forEach(e => { if (!e.classList.contains("form-msg")) e.textContent = ""; });
+  $$("[aria-invalid]", f).forEach(i => i.removeAttribute("aria-invalid"));
+  let first = null;
+  for (const k in errs){ const e = $("#" + k + "-e", f), i = $('[name="' + k + '"]', f); if (e) e.textContent = errs[k]; if (i){ i.setAttribute("aria-invalid", "true"); first ||= i; } }
+  if (first) first.focus();
+}
+async function runForm(f, cfg){
+  const v = Object.fromEntries(new FormData(f)); if (v.email) v.email = v.email.trim();
+  const errs = cfg.check(v); showErrors(f, errs); if (Object.keys(errs).length) return;
+  const btn = $('[type="submit"]', f), label = btn.textContent, m = $(".form-msg", f);
+  btn.disabled = true; btn.textContent = cfg.busy; if (m) m.textContent = "";
+  try { await cfg.submit(v, f); }
+  catch (err){
+    if (err instanceof ApiError && Object.keys(err.fields).length) showErrors(f, err.fields);
+    else if (m) m.textContent = err instanceof ApiError ? err.message : "Something went wrong. Try again.";
+  } finally { if (btn.isConnected){ btn.disabled = false; btn.textContent = label; } }
+}
+
+/* ---------- dashboard views ---------- */
+async function hubHTML(){
+  const L = SECTIONS.filter(s => s.row), d = await Promise.all(L.map(s => load(s.key)));
+  const by = Object.fromEntries(L.map((s, i) => [s.key, d[i]]));
+  renderNav();
+  const u = Auth.user, c = by["watch-history"].find(h => h.progress < 1);
+  const sub = s => { if (s.key === "profile") return u.email; if (s.key === "settings") return "Alerts and theme"; const a = by[s.key];
+    if (s.key === "notifications"){ const n = a.filter(x => !x.read).length; return n ? `${n} new` : "All caught up"; } return `${a.length} ${a.length === 1 ? "item" : "items"}`; };
+  return `<div class="greet"><h1 tabindex="-1">${greeting()}, ${esc(u.name.split(" ")[0])}</h1><p class="meta">Everything you've watched, heard, saved and prayed for.</p></div>`
+    + (c ? `<a class="cont" href="${safeUrl(c.url)}"><span class="meta">Pick up where you left off</span><h2>${esc(c.title)}</h2><div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(c.progress * 100)}"><i style="width:${Math.round(c.progress * 100)}%"></i></div><span class="btn btn-primary btn-sm">Resume</span></a>` : "")
+    + `<div class="tiles">${SECTIONS.map(s => Tile(s, sub(s))).join("")}</div>`;
+}
+function profileHTML(){
+  const u = Auth.user;
+  return PageHead({ title:"Profile", sub:"How you appear across AJEY CJEY." }) + `<div class="panel"><div class="who2">${Avatar(u.name, "lg")}<div><b>${esc(u.name)}</b><p class="meta">Member since ${esc(fmtDate(u.createdAt, { month:"long", year:"numeric" }))}</p></div></div>
+  <form id="profileForm" novalidate>${Field({ id:"name", label:"Full name", value:u.name, auto:"name" })}${Field({ id:"email", label:"Email", type:"email", value:u.email, extra:"disabled", hint:"Your email is your sign-in and can't be changed here." })}${Field({ id:"phone", label:"Phone", type:"tel", value:u.phone, auto:"tel", req:false, hint:"Optional. Used for event reminders." })}${Field({ id:"city", label:"City", value:u.city, auto:"address-level2", req:false })}<div class="fld"><label for="bio">About you</label><textarea id="bio" name="bio" rows="3" maxlength="240">${esc(u.bio)}</textarea></div>${msg}${Btn({ label:"Save changes", type:"submit" })}</form></div>`;
+}
+function settingsHTML(){
+  const u = Auth.user, s = u.settings || {}, t = s.theme || "auto";
+  const sw = (k, l, d) => `<label class="sw"><span><b>${l}</b><span class="meta">${d}</span></span><input type="checkbox" data-setting="${k}"${s[k] !== false ? " checked" : ""}></label>`;
+  return PageHead({ title:"Settings" })
+    + `<div class="panel"><h2>Alerts</h2>${sw("emailUpdates", "Weekly encounter email", "New worship, a devotional and upcoming events.")}${sw("eventReminders", "Event reminders", "A reminder before events you registered for.")}${sw("prayerUpdates", "Prayer updates", "Know when someone prays for or answers your request.")}</div>`
+    + `<div class="panel"><h2>Appearance</h2><div class="seg" role="group" aria-label="Theme">${[["auto", "Match device"], ["light", "Light"], ["dark", "Dark"]].map(([v, l]) => `<button class="chip" type="button" data-act="theme" data-v="${v}" aria-pressed="${t === v}">${l}</button>`).join("")}</div></div>`
+    + `<div class="panel"><h2>Account</h2><p class="meta" style="margin-bottom:14px">Signed in as ${esc(u.email)}</p>${Btn({ label:"Sign out", kind:"outline", act:"signout" })}</div>`;
+}
+async function listHTML(S){
+  const items = await load(S.key), n = items.length;
+  return PageHead({ title:S.title, sub:n ? `${n} ${n === 1 ? "item" : "items"}` : "", action:S.action ? S.action(items) : "" }) + (S.top || "")
+    + (n ? `<ul class="rows">${items.map(i => Row({ hue:i.hue ?? hueOf(i.title || i.text || i.id), id:i.id, remove:S.remove, ...S.row(i) })).join("")}</ul>` : Empty(S.empty));
+}
+async function fillPane(S, focus){
+  const my = rid;
+  try {
+    const html = !S ? await hubHTML() : S.key === "profile" ? profileHTML() : S.key === "settings" ? settingsHTML() : await listHTML(S);
+    if (my !== rid) return;
+    $("#pane").innerHTML = html; renderNav();
+    if (focus){ const h = $("#pane h1"); if (h) h.focus({ preventScroll:true }); }
+  } catch (e){
+    if (my !== rid) return;
+    if (e.code === "unauthorized"){ await Auth.logout(); return go("/login", true); }
+    $("#pane").innerHTML = Empty({ title:"Couldn't load this page", text:e.message || "Try again in a moment." }) + `<p class="center">${Btn({ label:"Try again", act:"retry" })}</p>`;
+  }
+}
+const refresh = async () => { delete Cache[cur]; await fillPane(SECTIONS.find(s => s.key === cur)); };
+function viewDash(key){
+  const S = key && SECTIONS.find(s => s.key === key);
+  if (key && !S) return go("/me", true);
+  rid++; cur = key || "";
+  set(`<div class="wrap dash ${key ? "sub" : "hub"}">${Rail(key)}<section class="pane" id="pane" aria-live="polite"><div class="skel"></div></section></div>`, S ? S.title : "MY AJEY");
+  renderNav(); fillPane(S, true);
+}
+
+/* ---------- router ---------- */
+function route(){
+  const h = location.hash.replace(/^#\/?/, ""), [p, q = ""] = h.split("?"), [a, b] = p.split("/").filter(Boolean);
+  if (a === "me"){ if (!Auth.user){ next = "/" + h; return go("/login", true); } return viewDash(b); }
+  if (!a || !VIEWS[a]) return go(Auth.user ? "/me" : "/login", true);
+  if (Auth.user && a !== "reset") return go("/me", true);
+  renderNav(); VIEWS[a](new URLSearchParams(q));
+}
+
+/* ---------- events ---------- */
+$("#app").addEventListener("submit", e => { const cfg = FORMS[e.target.id]; if (cfg){ e.preventDefault(); runForm(e.target, cfg); } });
+$("#app").addEventListener("change", async e => {
+  const k = e.target.dataset.setting; if (!k) return;
+  try { await Auth.updateProfile({ settings:{ ...Auth.user.settings, [k]:e.target.checked } }); toast("Saved"); }
+  catch (err){ e.target.checked = !e.target.checked; toast(err.message || "Couldn't save. Try again."); }
+});
+$("#app").addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const act = b.dataset.act, S = SECTIONS.find(s => s.key === cur);
+  try {
+    if (act === "peek"){ const i = $("input", b.parentNode), show = i.type === "password"; i.type = show ? "text" : "password"; i.dataset.pw = show ? "1" : ""; b.textContent = show ? "Hide" : "Show"; b.setAttribute("aria-pressed", show); }
+    else if (act === "remove"){ await Account.remove(cur, b.dataset.id); await refresh(); toast("Removed"); }
+    else if (act === "clear"){ if (!confirm(`Clear all ${S.title.toLowerCase()}?`)) return; await Account.clear(cur); await refresh(); toast("Cleared"); }
+    else if (act === "readall"){ await Account.patchAll("notifications", { read:true }); await refresh(); renderNav(); toast("All marked read"); }
+    else if (act === "retry") await refresh();
+    else if (act === "signout"){ await Auth.logout(); go("/login", true); toast("Signed out"); }
+    else if (act === "theme"){
+      applyTheme(b.dataset.v); $$('[data-act="theme"]').forEach(x => x.setAttribute("aria-pressed", x === b));
+      await Auth.updateProfile({ settings:{ ...Auth.user.settings, theme:b.dataset.v } }); toast("Saved");
+    }
+  } catch (err){
+    if (err.code === "unauthorized"){ await Auth.logout(); go("/login", true); }
+    else toast(err.message || "Something went wrong. Try again.");
+  }
+});
+Auth.onChange(u => {
+  if (u && u.settings) applyTheme(u.settings.theme);
+  if (!u) for (const k in Cache) delete Cache[k];
+});
+addEventListener("hashchange", route);
+Auth.init().then(route);
+</script>
+
+<script>
+/* shared nav: menu toggle + current-page marker */
+(function(){
+  const burger=document.getElementById("burger"), drawer=document.getElementById("drawer");
+  function setMenu(o){burger.setAttribute("aria-expanded",o);burger.setAttribute("aria-label",o?"Close menu":"Open menu");drawer.classList.toggle("open",o);drawer.setAttribute("aria-hidden",!o);document.documentElement.style.overflow=o?"hidden":"";}
+  burger.addEventListener("click",()=>setMenu(burger.getAttribute("aria-expanded")!=="true"));
+  drawer.addEventListener("click",e=>{if(e.target.closest("a"))setMenu(false)});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
+  matchMedia("(min-width:1000px)").addEventListener("change",e=>{if(e.matches)setMenu(false)});
+  const page=location.pathname.split("/").pop()||"index.html";
+  function mark(){
+    const h=location.hash;
+    const cur=page==="watch.html"?(h.startsWith("#/listen")?"listen":"watch"):
+      page==="word.html"?(h.startsWith("#/prayer")?"prayer":h.startsWith("#/community")?"community":"word"):
+      page==="account.html"?"me":"";
+    document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  }
+  addEventListener("hashchange",mark);mark();
+})();
+</script>
+</body>
+</html>
